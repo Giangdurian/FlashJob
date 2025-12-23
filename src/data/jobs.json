@@ -1,0 +1,635 @@
+{
+  "jobs": [
+    {
+      "id": 1,
+      "title": "Nhân Viên Kho - Làm Việc Tại VinMart",
+      "company": "VINMART",
+      "companyLogo": "VM",
+      "location": "Hà Nội",
+      "salary": "35,000 - 45,000 VNĐ/giờ",
+      "duration": "1-2 tháng",
+      "badge": "HOT",
+      "urgent": true,
+      "instantPay": false,
+      "postedTime": "Có thưởng ca đêm",
+      "postedDate": "2025-12-20",
+      "expiryDate": "2026-02-20",
+      "openings": 25,
+      "applied": 143,
+      "companyRating": 4.5,
+      "companyReviews": 189,
+      "requirements": [
+        "Sức khỏe tốt, có thể mang vác đồ nặng",
+        "Chịu được áp lực công việc cao",
+        "Linh hoạt thời gian, có thể làm cuối tuần"
+      ],
+      "responsibilities": [
+        "Nhận và sắp xếp hàng hóa trong kho",
+        "Đóng gói và chuẩn bị đơn hàng",
+        "Giữ khu vực làm việc sạch sẽ và an toàn",
+        "Phối hợp với đồng nghiệp để hoàn thành mục tiêu"
+      ],
+      "benefits": [
+        "Thanh toán lương ngay sau ca làm",
+        "Thưởng làm thêm giờ và ngày lễ",
+        "Được cung cấp đồng phục và đồ bảo hộ",
+        "Ăn trưa miễn phí"
+      ],
+      "shifts": [
+        {
+          "time": "Ca sáng",
+          "hours": "6:00 - 14:00",
+          "rate": "35,000 VND/giờ"
+        },
+        {
+          "time": "Ca chiều",
+          "hours": "14:00 - 22:00",
+          "rate": "40,000 VND/giờ"
+        },
+        {
+          "time": "Ca đêm",
+          "hours": "22:00 - 6:00",
+          "rate": "45,000 VND/giờ"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Tài Xế Giao Hàng - Lương Cao",
+      "company": "GRAB VIỆT NAM",
+      "companyLogo": "GR",
+      "location": "Hà Nội",
+      "salary": "40,000 - 50,000 VNĐ/giờ",
+      "duration": "1 tháng",
+      "badge": "HOT",
+      "urgent": true,
+      "instantPay": true,
+      "postedTime": "Thanh toán hàng ngày",
+      "postedDate": "2025-12-21",
+      "expiryDate": "2026-01-21",
+      "openings": 50,
+      "applied": 287,
+      "companyRating": 4.7,
+      "companyReviews": 543,
+      "requirements": [
+        "Có xe máy và bằng lái xe",
+        "Biết đường phố Hà Nội",
+        "Điện thoại thông minh để dùng app"
+      ],
+      "responsibilities": [
+        "Nhận và giao đơn hàng đúng hạn",
+        "Liên hệ khách hàng khi cần thiết",
+        "Giữ hàng hóa nguyên vẹn trong quá trình giao",
+        "Báo cáo vấn đề phát sinh"
+      ],
+      "benefits": [
+        "Thanh toán cuối ngày qua ví điện tử",
+        "Thưởng đơn hàng cao điểm",
+        "Hỗ trợ xăng xe",
+        "Bảo hiểm tai nạn"
+      ],
+      "shifts": [
+        {
+          "time": "Ca sáng",
+          "hours": "7:00 - 12:00",
+          "rate": "40,000 VND/giờ"
+        },
+        {
+          "time": "Ca trưa",
+          "hours": "11:00 - 14:00",
+          "rate": "50,000 VND/giờ"
+        },
+        {
+          "time": "Ca tối",
+          "hours": "17:00 - 21:00",
+          "rate": "45,000 VND/giờ"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Nhân Viên Bán Hàng - Siêu Thị Lotte",
+      "company": "LOTTE MART",
+      "companyLogo": "LM",
+      "location": "Hà Nội",
+      "salary": "30,000 - 38,000 VNĐ/giờ",
+      "duration": "1-2 tháng",
+      "badge": "HOT",
+      "urgent": false,
+      "instantPay": true,
+      "postedTime": "Nghỉ xoay ca",
+      "postedDate": "2025-12-19",
+      "expiryDate": "2026-02-19",
+      "openings": 30,
+      "applied": 165,
+      "companyRating": 4.3,
+      "companyReviews": 234,
+      "requirements": [
+        "Giao tiếp tốt, nhiệt tình",
+        "Đứng làm việc cả ngày",
+        "Có thể làm cuối tuần"
+      ],
+      "responsibilities": [
+        "Tư vấn và bán hàng cho khách",
+        "Sắp xếp hàng hóa trên kệ",
+        "Thu ngân và quét mã hàng",
+        "Hỗ trợ khách hàng tìm sản phẩm"
+      ],
+      "benefits": [
+        "Thanh toán hàng tuần",
+        "Giảm giá khi mua hàng tại siêu thị",
+        "Thưởng doanh số",
+        "Môi trường làm việc điều hòa"
+      ],
+      "shifts": [
+        {
+          "time": "Ca sáng",
+          "hours": "7:00 - 13:00",
+          "rate": "30,000 VND/giờ"
+        },
+        {
+          "time": "Ca chiều",
+          "hours": "13:00 - 19:00",
+          "rate": "32,000 VND/giờ"
+        },
+        {
+          "time": "Ca tối",
+          "hours": "19:00 - 22:00",
+          "rate": "38,000 VND/giờ"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Nhân Viên Đóng Gói Hàng - Shopee",
+      "company": "SHOPEE EXPRESS",
+      "companyLogo": "SP",
+      "location": "Bắc Ninh, Hà Nội",
+      "salary": "32,000 - 40,000 VNĐ/giờ",
+      "duration": "14 ngày",
+      "badge": "HOT",
+      "urgent": true,
+      "instantPay": false,
+      "postedTime": "Tuyển gấp",
+      "postedDate": "2025-12-22",
+      "expiryDate": "2026-01-05",
+      "openings": 100,
+      "applied": 421,
+      "companyRating": 4.2,
+      "companyReviews": 678,
+      "requirements": [
+        "Nhanh tay, khéo léo",
+        "Chịu được áp lực cao",
+        "Làm việc theo ca"
+      ],
+      "responsibilities": [
+        "Đóng gói đơn hàng nhanh và cẩn thận",
+        "Dán nhãn và phân loại hàng",
+        "Kiểm tra chất lượng bao bì",
+        "Đạt chỉ tiêu đóng gói theo ca"
+      ],
+      "benefits": [
+        "Thanh toán 2 lần/tháng",
+        "Thưởng năng suất cao",
+        "Ăn ca miễn phí",
+        "Xe đưa đón từ Hà Nội"
+      ],
+      "shifts": [
+        {
+          "time": "Ca sáng",
+          "hours": "6:00 - 14:00",
+          "rate": "32,000 VND/giờ"
+        },
+        {
+          "time": "Ca chiều",
+          "hours": "14:00 - 22:00",
+          "rate": "36,000 VND/giờ"
+        },
+        {
+          "time": "Ca đêm",
+          "hours": "22:00 - 6:00",
+          "rate": "40,000 VND/giờ"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Nhân Viên Phục Vụ Nhà Hàng - Lotteria",
+      "company": "LOTTERIA VIỆT NAM",
+      "companyLogo": "LT",
+      "location": "Hà Nội",
+      "salary": "28,000 - 35,000 VNĐ/giờ",
+      "duration": "7 ngày",
+      "badge": "HOT",
+      "urgent": true,
+      "instantPay": false,
+      "postedTime": "Ăn ca miễn phí",
+      "postedDate": "2025-12-21",
+      "expiryDate": "2025-12-28",
+      "openings": 15,
+      "applied": 89,
+      "companyRating": 4.4,
+      "companyReviews": 312,
+      "requirements": [
+        "Vui vẻ, niềm nở với khách",
+        "Đứng làm việc lâu",
+        "Có thể làm cuối tuần"
+      ],
+      "responsibilities": [
+        "Phục vụ khách hàng tại quầy",
+        "Chuẩn bị đồ ăn nhanh",
+        "Giữ khu vực làm việc sạch sẽ",
+        "Thu tiền và giao hàng"
+      ],
+      "benefits": [
+        "Ăn 2 bữa miễn phí mỗi ca",
+        "Thanh toán cuối tuần",
+        "Được đào tạo kỹ năng",
+        "Môi trường trẻ trung"
+      ],
+      "shifts": [
+        {
+          "time": "Ca sáng",
+          "hours": "6:00 - 11:00",
+          "rate": "28,000 VND/giờ"
+        },
+        {
+          "time": "Ca trưa",
+          "hours": "11:00 - 14:00",
+          "rate": "35,000 VND/giờ"
+        },
+        {
+          "time": "Ca tối",
+          "hours": "17:00 - 22:00",
+          "rate": "32,000 VND/giờ"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Công Nhân Phụ Xây - Dự Án Bắc Ninh",
+      "company": "RICONS",
+      "companyLogo": "RC",
+      "location": "Bắc Ninh, Hà Nội",
+      "salary": "32,000 - 42,000 VNĐ/giờ",
+      "duration": "1 tháng",
+      "badge": "HOT",
+      "urgent": true,
+      "instantPay": false,
+      "postedTime": "Tuyển gấp nhiều người",
+      "postedDate": "2025-12-18",
+      "expiryDate": "2026-01-18",
+      "openings": 50,
+      "applied": 234,
+      "companyRating": 4.2,
+      "companyReviews": 189,
+      "requirements": [
+        "Nam, sức khỏe tốt",
+        "Có thể mang vác nặng",
+        "Không ngại nắng mưa, bụi bặm"
+      ],
+      "responsibilities": [
+        "Phụ giúp thợ xây, thợ sắt",
+        "Mang vác vật liệu xây dựng",
+        "Trộn bê tông, vữa xây",
+        "Dọn dẹp khu vực làm việc"
+      ],
+      "benefits": [
+        "Thanh toán cuối tuần",
+        "Thưởng làm thêm giờ",
+        "Ăn trưa tại công trường",
+        "Có xe đưa đón từ Hà Nội"
+      ],
+      "shifts": [
+        {
+          "time": "Ca sáng",
+          "hours": "6:00 - 12:00",
+          "rate": "32,000 VND/giờ"
+        },
+        {
+          "time": "Ca chiều",
+          "hours": "13:00 - 18:00",
+          "rate": "35,000 VND/giờ"
+        },
+        {
+          "time": "Cả ngày",
+          "hours": "6:00 - 18:00",
+          "rate": "42,000 VND/giờ"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Công Nhân May Mặc - Khu Công Nghiệp",
+      "company": "GARMENT 10 CORPORATION",
+      "companyLogo": "G10",
+      "location": "Bắc Ninh, Hưng Yên",
+      "salary": "28,000 - 38,000 VNĐ/giờ",
+      "duration": "1-2 tháng",
+      "badge": "HOT",
+      "urgent": true,
+      "instantPay": false,
+      "postedTime": "Tuyển số lượng lớn",
+      "postedDate": "2025-12-17",
+      "expiryDate": "2026-02-17",
+      "openings": 200,
+      "applied": 567,
+      "companyRating": 4.3,
+      "companyReviews": 421,
+      "requirements": [
+        "Nữ, tay khéo léo",
+        "Mắt tốt, không cận mận",
+        "Chịu được áp lực công việc"
+      ],
+      "responsibilities": [
+        "May theo quy trình sản xuất",
+        "Cắt chỉ thừa, kiểm tra lỗi",
+        "Đạt chỉ tiêu sản lượng",
+        "Giữ khu vực làm việc gọn gàng"
+      ],
+      "benefits": [
+        "Thanh toán 2 lần/tháng",
+        "Thưởng sản lượng cao",
+        "Ăn trưa miễn phí",
+        "Xe đưa đón từ Hà Nội"
+      ],
+      "shifts": [
+        {
+          "time": "Ca sáng",
+          "hours": "7:00 - 15:00",
+          "rate": "28,000 VND/giờ"
+        },
+        {
+          "time": "Ca chiều",
+          "hours": "15:00 - 23:00",
+          "rate": "32,000 VND/giờ"
+        },
+        {
+          "time": "Ca đêm",
+          "hours": "23:00 - 7:00",
+          "rate": "38,000 VND/giờ"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "title": "Nhân Viên Phụ Bếp - Nhà Hàng",
+      "company": "NHÀ HÀNG KFC",
+      "companyLogo": "KF",
+      "location": "Hà Nội",
+      "salary": "26,000 - 33,000 VNĐ/giờ",
+      "duration": "7 ngày",
+      "badge": null,
+      "urgent": false,
+      "instantPay": false,
+      "postedTime": "Ăn ca miễn phí",
+      "postedDate": "2025-12-20",
+      "expiryDate": "2025-12-27",
+      "openings": 8,
+      "applied": 45,
+      "companyRating": 4.3,
+      "companyReviews": 267,
+      "requirements": [
+        "Nhanh nhẹn, khỏe mạnh",
+        "Không ngại dầu mỡ",
+        "Có thể làm ca tối"
+      ],
+      "responsibilities": [
+        "Sơ chế nguyên liệu",
+        "Chiên, rán theo quy trình",
+        "Giữ bếp sạch sẽ",
+        "Hỗ trợ bếp trưởng"
+      ],
+      "benefits": [
+        "Ăn 2 bữa/ca miễn phí",
+        "Thanh toán cuối tuần",
+        "Làm trong nhà có máy lạnh",
+        "Được đào tạo kỹ năng nấu"
+      ],
+      "shifts": [
+        {
+          "time": "Ca sáng",
+          "hours": "6:00 - 14:00",
+          "rate": "26,000 VND/giờ"
+        },
+        {
+          "time": "Ca chiều",
+          "hours": "14:00 - 22:00",
+          "rate": "30,000 VND/giờ"
+        },
+        {
+          "time": "Ca tối",
+          "hours": "18:00 - 23:00",
+          "rate": "33,000 VND/giờ"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "title": "Công Nhân Lắp Ráp Điện Tử",
+      "company": "SAMSUNG ELECTRONICS VN",
+      "companyLogo": "SS",
+      "location": "Bắc Ninh, Thái Nguyên",
+      "salary": "30,000 - 40,000 VNĐ/giờ",
+      "duration": "1-2 tháng",
+      "badge": "HOT",
+      "urgent": true,
+      "instantPay": false,
+      "postedTime": "Lương cao + thưởng",
+      "postedDate": "2025-12-19",
+      "expiryDate": "2026-02-19",
+      "openings": 150,
+      "applied": 689,
+      "companyRating": 4.6,
+      "companyReviews": 823,
+      "requirements": [
+        "Mắt tốt, tay khéo léo",
+        "Chi tiết, cẩn thận",
+        "Làm việc theo ca"
+      ],
+      "responsibilities": [
+        "Lắp ráp linh kiện điện tử",
+        "Kiểm tra chất lượng sản phẩm",
+        "Báo cáo sản phẩm lỗi",
+        "Vệ sinh dụng cụ, thiết bị"
+      ],
+      "benefits": [
+        "Lương ổn định + thưởng KPI",
+        "Thưởng sản lượng vượt",
+        "Ăn trưa miễn phí",
+        "Xe đưa đón, bảo hiểm đầy đủ"
+      ],
+      "shifts": [
+        {
+          "time": "Ca sáng",
+          "hours": "6:00 - 14:00",
+          "rate": "30,000 VND/giờ"
+        },
+        {
+          "time": "Ca chiều",
+          "hours": "14:00 - 22:00",
+          "rate": "35,000 VND/giờ"
+        },
+        {
+          "time": "Ca đêm",
+          "hours": "22:00 - 6:00",
+          "rate": "40,000 VND/giờ"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "title": "Nhân Viên Phục Vụ Sự Kiện - Cuối Tuần",
+      "company": "VIET UC GROUP",
+      "companyLogo": "VUG",
+      "location": "Hà Nội",
+      "salary": "35,000 - 45,000 VNĐ/giờ",
+      "duration": "14 ngày",
+      "badge": null,
+      "urgent": false,
+      "instantPay": true,
+      "postedTime": "Chỉ làm cuối tuần",
+      "postedDate": "2025-12-18",
+      "expiryDate": "2026-01-01",
+      "openings": 30,
+      "applied": 156,
+      "companyRating": 4.5,
+      "companyReviews": 234,
+      "requirements": [
+        "Ngoại hình khá, giao tiếp tốt",
+        "Nhanh nhẹn, nhiệt tình",
+        "Có thể làm cuối tuần"
+      ],
+      "responsibilities": [
+        "Đón tiếp và hướng dẫn khách",
+        "Phục vụ đồ ăn, thức uống",
+        "Hỗ trợ setup và dọn dẹp sự kiện",
+        "Đảm bảo sự kiện diễn ra suôn sẻ"
+      ],
+      "benefits": [
+        "Thanh toán cuối mỗi sự kiện",
+        "Lương cao vào cuối tuần",
+        "Được ăn uống tại sự kiện",
+        "Tip từ khách"
+      ],
+      "shifts": [
+        {
+          "time": "Sự kiện ngày",
+          "hours": "Linh hoạt 4-6 giờ",
+          "rate": "35,000 VND/giờ"
+        },
+        {
+          "time": "Sự kiện tối",
+          "hours": "Linh hoạt 4-8 giờ",
+          "rate": "45,000 VND/giờ"
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "title": "Nhân Viên Giao Hàng - SPX Express",
+      "company": "SPX EXPRESS VIỆT NAM",
+      "companyLogo": "SX",
+      "location": "Hà Nội, Bắc Ninh",
+      "salary": "38,000 - 48,000 VNĐ/giờ",
+      "duration": "1 tháng",
+      "badge": null,
+      "urgent": false,
+      "instantPay": false,
+      "postedTime": "Có xe máy",
+      "postedDate": "2025-12-17",
+      "expiryDate": "2026-01-17",
+      "openings": 40,
+      "applied": 198,
+      "companyRating": 4.4,
+      "companyReviews": 432,
+      "requirements": [
+        "Có xe máy và bằng lái",
+        "Biết đường khu vực",
+        "Sức khỏe tốt"
+      ],
+      "responsibilities": [
+        "Nhận và giao hàng đúng địa chỉ",
+        "Liên hệ người nhận",
+        "Thu tiền COD nếu có",
+        "Báo cáo tình trạng giao hàng"
+      ],
+      "benefits": [
+        "Thanh toán 2 lần/tháng",
+        "Thưởng theo số đơn giao",
+        "Hỗ trợ xăng xe và bảo dưỡng",
+        "Bảo hiểm tai nạn"
+      ],
+      "shifts": [
+        {
+          "time": "Ca sáng",
+          "hours": "7:00 - 12:00",
+          "rate": "38,000 VND/giờ"
+        },
+        {
+          "time": "Ca chiều",
+          "hours": "13:00 - 18:00",
+          "rate": "42,000 VND/giờ"
+        },
+        {
+          "time": "Cả ngày",
+          "hours": "8:00 - 17:00",
+          "rate": "48,000 VND/giờ"
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "title": "Nhân Viên Bốc Dỡ Hàng - Bến Xe",
+      "company": "VIETTEL POST",
+      "companyLogo": "VP",
+      "location": "Hà Nội",
+      "salary": "30,000 - 40,000 VNĐ/giờ",
+      "duration": "7 ngày",
+      "badge": "HOT",
+      "urgent": false,
+      "instantPay": false,
+      "postedTime": "Thanh toán cuối ngày",
+      "postedDate": "2025-12-21",
+      "expiryDate": "2025-12-28",
+      "openings": 15,
+      "applied": 87,
+      "companyRating": 3.9,
+      "companyReviews": 134,
+      "requirements": [
+        "Nam, sức khỏe tốt",
+        "Có thể mang vác nặng",
+        "Không ngại nắng mưa"
+      ],
+      "responsibilities": [
+        "Bốc dỡ hàng hóa lên xuống xe",
+        "Sắp xếp hàng gọn gàng",
+        "Kiểm đếm số lượng hàng",
+        "Hỗ trợ tài xế khi cần"
+      ],
+      "benefits": [
+        "Thanh toán cuối mỗi ca",
+        "Thưởng năng suất",
+        "Ăn trưa tại bến",
+        "Làm việc theo nhóm"
+      ],
+      "shifts": [
+        {
+          "time": "Ca sáng",
+          "hours": "6:00 - 12:00",
+          "rate": "30,000 VND/giờ"
+        },
+        {
+          "time": "Ca chiều",
+          "hours": "13:00 - 18:00",
+          "rate": "35,000 VND/giờ"
+        },
+        {
+          "time": "Cả ngày",
+          "hours": "6:00 - 18:00",
+          "rate": "40,000 VND/giờ"
+        }
+      ]
+    }
+  ]
+}
