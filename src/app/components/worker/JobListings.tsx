@@ -14,7 +14,11 @@ import {
   ChevronDown,
   LogOut,
   User,
-  Settings
+  Settings,
+  Crown,
+  Shield,
+  GraduationCap,
+  MessageSquare
 } from 'lucide-react';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
@@ -28,15 +32,22 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '../ui/dropdown-menu';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '../ui/tooltip';
 import jobsData from '../../../data/jobs.json';
 
 interface JobListingsProps {
   onViewJobDetail: (jobId: number) => void;
   onNavigate: (screen: any) => void;
   onLogout?: () => void;
+  onSetWorkerView?: (view: 'dashboard' | 'training' | 'withdraw' | 'protection' | 'community') => void;
 }
 
-export function JobListings({ onViewJobDetail, onNavigate, onLogout }: JobListingsProps) {
+export function JobListings({ onViewJobDetail, onNavigate, onLogout, onSetWorkerView }: JobListingsProps) {
   const [showFilters, setShowFilters] = useState(true);
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [activeFilter, setActiveFilter] = useState('luong-cao');
@@ -83,14 +94,58 @@ export function JobListings({ onViewJobDetail, onNavigate, onLogout }: JobListin
       <header className="bg-white shadow-sm sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-8">
               <button
                 onClick={() => onNavigate('landing')}
-                className="flex items-center gap-2 text-gray-700 hover:text-green-600 transition-colors cursor-pointer"
+                className="flex items-center gap-2 text-green-600 hover:opacity-80 cursor-pointer"
               >
                 <img src="/src/assets/images/logo.png" alt="FlashJob" className="w-8 h-8" />
-                <span className="font-semibold">Quay lại</span>
+                <h1>FlashJob</h1>
               </button>
+              <nav className="hidden md:flex items-center gap-6">
+                <button
+                  onClick={() => onNavigate('landing')}
+                  className="text-gray-700 hover:text-green-600 cursor-pointer transition-colors"
+                >
+                  Việc làm
+                </button>
+                <button
+                  onClick={() => {
+                    onSetWorkerView?.('training');
+                    onNavigate('dashboard');
+                  }}
+                  className="text-gray-700 hover:text-green-600 cursor-pointer transition-colors flex items-center gap-1"
+                >
+                  <GraduationCap className="w-4 h-4" />
+                  Đào tạo nghề
+                </button>
+                <button
+                  onClick={() => {
+                    onSetWorkerView?.('protection');
+                    onNavigate('dashboard');
+                  }}
+                  className="text-gray-700 hover:text-red-600 cursor-pointer transition-colors flex items-center gap-1"
+                >
+                  <Shield className="w-4 h-4" />
+                  Bảo vệ & Hỗ trợ
+                </button>
+                <button
+                  onClick={() => {
+                    onSetWorkerView?.('community');
+                    onNavigate('dashboard');
+                  }}
+                  className="text-gray-700 hover:text-purple-600 cursor-pointer transition-colors flex items-center gap-1"
+                >
+                  <MessageSquare className="w-4 h-4" />
+                  Cộng đồng
+                </button>
+                <button
+                  onClick={() => onNavigate('utilities')}
+                  className="text-gray-700 hover:text-green-600 transition-colors cursor-pointer"
+                >
+                  Tiện ích/Cẩm nang
+                </button>
+              </nav>
             </div>
             <div className="flex items-center gap-4">
               <button className="text-gray-700 hover:text-green-600 transition-colors cursor-pointer">
@@ -113,7 +168,10 @@ export function JobListings({ onViewJobDetail, onNavigate, onLogout }: JobListin
                     </div>
                   </DropdownMenuLabel>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem onClick={() => onNavigate('dashboard')} className="cursor-pointer">
+                  <DropdownMenuItem onClick={() => {
+                    onSetWorkerView?.('dashboard');
+                    onNavigate('dashboard');
+                  }} className="cursor-pointer">
                     <User className="w-4 h-4 mr-2" />
                     Hồ sơ của tôi
                   </DropdownMenuItem>
@@ -328,7 +386,23 @@ export function JobListings({ onViewJobDetail, onNavigate, onLogout }: JobListin
                                 {job.title}
                               </h3>
                             </div>
-                            <p className="text-gray-600 mb-2">{job.company}</p>
+                            <div className="flex items-center gap-2">
+                              <p className="text-gray-600">{job.company}</p>
+                              {job.companyTier === 'pro' && (
+                                <TooltipProvider>
+                                  <Tooltip>
+                                    <TooltipTrigger asChild>
+                                      <span className="bg-gradient-to-r from-yellow-500 to-orange-500 text-white text-[10px] px-2 py-0.5 rounded font-medium cursor-pointer">
+                                        Pro
+                                      </span>
+                                    </TooltipTrigger>
+                                    <TooltipContent>
+                                      <p>Nhà tuyển dụng là Pro Company</p>
+                                    </TooltipContent>
+                                  </Tooltip>
+                                </TooltipProvider>
+                              )}
+                            </div>
                           </div>
                         </div>
 

@@ -23,7 +23,12 @@ import {
   ChevronDown,
   LogOut,
   User,
-  Settings
+  Settings,
+  Crown,
+  MessageSquare,
+  Phone,
+  AlertTriangle,
+  GraduationCap
 } from 'lucide-react';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
@@ -35,6 +40,12 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '../ui/dropdown-menu';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '../ui/tooltip';
 import {
   Select,
   SelectContent,
@@ -51,9 +62,10 @@ interface LandingPageProps {
   onLogout?: () => void;
   onViewJobDetail?: (jobId: number) => void;
   onNavigateToLogin?: (role: 'worker' | 'employer') => void;
+  onSetWorkerView?: (view: 'dashboard' | 'training' | 'withdraw' | 'protection' | 'community') => void;
 }
 
-export function LandingPage({ onViewJobs, onNavigate, onLogout, onViewJobDetail, onNavigateToLogin }: LandingPageProps) {
+export function LandingPage({ onViewJobs, onNavigate, onLogout, onViewJobDetail, onNavigateToLogin, onSetWorkerView }: LandingPageProps) {
   const [keyword, setKeyword] = useState('');
   const [location, setLocation] = useState('');
   const [industry, setIndustry] = useState('');
@@ -130,7 +142,7 @@ export function LandingPage({ onViewJobs, onNavigate, onLogout, onViewJobDetail,
 
   const trustSignals = [
     { icon: Shield, label: 'Công việc xác thực', description: 'Tất cả nhà tuyển dụng đã được xác minh' },
-    { icon: Zap, label: 'Thanh toán nhanh', description: 'Nhận lương ngay sau ca làm' },
+    { icon: Zap, label: 'Thanh toán nhanh', description: 'Nhận lương ngay sau ca làm hoặc theo tuần' },
     { icon: CheckCircle2, label: 'Nền tảng an toàn', description: 'Thông tin của bạn được bảo mật' },
   ];
 
@@ -194,7 +206,8 @@ export function LandingPage({ onViewJobs, onNavigate, onLogout, onViewJobDetail,
     icon: getJobIcon(job.id),
     color: getJobColor(job.id),
     urgent: job.urgent,
-    logo: getCompanyLogo(job.company)
+    logo: getCompanyLogo(job.company),
+    companyTier: job.companyTier
   }));
 
   const handleSearch = () => {
@@ -217,8 +230,41 @@ export function LandingPage({ onViewJobs, onNavigate, onLogout, onViewJobDetail,
                 <h1>FlashJob</h1>
               </button>
               <nav className="hidden md:flex items-center gap-6">
-                <button className="text-gray-700 hover:text-green-600 transition-colors cursor-pointer">
+                <button
+                  onClick={() => onViewJobs()}
+                  className="text-gray-700 hover:text-green-600 cursor-pointer transition-colors"
+                >
                   Việc làm
+                </button>
+                <button
+                  onClick={() => {
+                    onSetWorkerView?.('training');
+                    onNavigate?.('dashboard');
+                  }}
+                  className="text-gray-700 hover:text-green-600 cursor-pointer transition-colors flex items-center gap-1"
+                >
+                  <GraduationCap className="w-4 h-4" />
+                  Đào tạo nghề
+                </button>
+                <button
+                  onClick={() => {
+                    onSetWorkerView?.('protection');
+                    onNavigate?.('dashboard');
+                  }}
+                  className="text-gray-700 hover:text-red-600 cursor-pointer transition-colors flex items-center gap-1"
+                >
+                  <Shield className="w-4 h-4" />
+                  Bảo vệ & Hỗ trợ
+                </button>
+                <button
+                  onClick={() => {
+                    onSetWorkerView?.('community');
+                    onNavigate?.('dashboard');
+                  }}
+                  className="text-gray-700 hover:text-purple-600 cursor-pointer transition-colors flex items-center gap-1"
+                >
+                  <MessageSquare className="w-4 h-4" />
+                  Cộng đồng
                 </button>
                 <button
                   onClick={() => setShowUtilities(true)}
@@ -249,7 +295,10 @@ export function LandingPage({ onViewJobs, onNavigate, onLogout, onViewJobDetail,
                     </div>
                   </DropdownMenuLabel>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem onClick={() => onNavigate?.('dashboard')} className="cursor-pointer">
+                  <DropdownMenuItem onClick={() => {
+                    onSetWorkerView?.('dashboard');
+                    onNavigate?.('dashboard');
+                  }} className="cursor-pointer">
                     <User className="w-4 h-4 mr-2" />
                     Hồ sơ của tôi
                   </DropdownMenuItem>
@@ -277,10 +326,17 @@ export function LandingPage({ onViewJobs, onNavigate, onLogout, onViewJobDetail,
           <div className="absolute bottom-10 right-10 w-96 h-96 bg-purple-400 rounded-full blur-3xl"></div>
         </div>
 
-        {/* 3D Isometric Graphics */}
-        <div className="absolute right-0 top-0 bottom-0 w-1/2 hidden lg:block">
-          <div className="w-full h-full bg-gradient-to-br from-blue-600/20 to-purple-600/20 flex items-center justify-center">
-            <div className="text-white/30 text-9xl">🏢</div>
+        {/* FlashJob Logo - Centered */}
+        <div className="absolute right-0 top-0 bottom-0 w-1/2 hidden lg:flex items-center justify-center">
+          <div className="relative">
+            {/* Glow effect */}
+            <div className="absolute inset-0 bg-green-400/20 rounded-full blur-3xl scale-150"></div>
+            {/* Logo */}
+            <img
+              src="/src/assets/images/logo.png"
+              alt="FlashJob"
+              className="relative w-64 h-64 object-contain drop-shadow-2xl animate-pulse"
+            />
           </div>
         </div>
 
@@ -300,7 +356,7 @@ export function LandingPage({ onViewJobs, onNavigate, onLogout, onViewJobDetail,
             </h2>
 
             <p className="text-white/90 text-lg mb-8">
-              Job Search Engine Hàu Tiên Do Người Việt Phát Triển
+              Tìm việc làm thời vụ với mức lương chính thức nhanh 24h trên toàn quốc
             </p>
 
             {/* Search Bar */}
@@ -528,9 +584,23 @@ export function LandingPage({ onViewJobs, onNavigate, onLogout, onViewJobDetail,
                       <h4 className="text-gray-900 mb-1 group-hover:text-green-600 transition-colors line-clamp-2">
                         {job.title}
                       </h4>
-                      <div className="flex items-center gap-1 text-gray-600 text-sm">
+                      <div className="flex items-center gap-2 text-gray-600 text-sm">
                         <Building2 className="w-4 h-4" />
                         <span className="truncate">{job.company}</span>
+                        {job.companyTier === 'pro' && (
+                          <TooltipProvider>
+                            <Tooltip>
+                              <TooltipTrigger asChild>
+                                <span className="bg-gradient-to-r from-yellow-500 to-orange-500 text-white text-[10px] px-2 py-0.5 rounded font-medium cursor-pointer">
+                                  Pro
+                                </span>
+                              </TooltipTrigger>
+                              <TooltipContent>
+                                <p>Nhà tuyển dụng là Pro Company</p>
+                              </TooltipContent>
+                            </Tooltip>
+                          </TooltipProvider>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -651,37 +721,6 @@ export function LandingPage({ onViewJobs, onNavigate, onLogout, onViewJobDetail,
         </div>
       </section>
 
-      {/* Featured Categories */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center gap-2 mb-8">
-            <Star className="w-6 h-6 text-blue-600" />
-            <h3 className="text-gray-900">Doanh nghiệp TOP đầu</h3>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {categories.map((category, index) => {
-              const Icon = category.icon;
-              return (
-                <button
-                  key={index}
-                  onClick={() => onViewJobs(category.label)}
-                  className="group p-8 bg-white border-2 border-gray-200 rounded-xl hover:border-green-600 hover:shadow-lg transition-all cursor-pointer"
-                >
-                  <div className={`w-16 h-16 ${category.color} rounded-xl flex items-center justify-center mb-4 mx-auto group-hover:scale-110 transition-transform`}>
-                    <Icon className="w-8 h-8" />
-                  </div>
-                  <p className="text-gray-900 group-hover:text-green-600 transition-colors">
-                    {category.label}
-                  </p>
-                  <p className="text-gray-500 mt-1">500+ việc làm</p>
-                </button>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
       {/* Trust Signals */}
       <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -703,6 +742,204 @@ export function LandingPage({ onViewJobs, onNavigate, onLogout, onViewJobDetail,
                 </div>
               );
             })}
+          </div>
+        </div>
+      </section>
+
+      {/* Worker Protection & Community Features */}
+      <section className="py-20 bg-gradient-to-br from-red-50 via-purple-50 to-blue-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h3 className="text-gray-900 text-3xl font-bold mb-4">Chúng tôi bảo vệ quyền lợi của bạn</h3>
+            <p className="text-gray-600 text-lg">Không chỉ tìm việc, FlashJob còn đồng hành và bảo vệ bạn</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Worker Protection Card */}
+            <div className="bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-all group cursor-pointer">
+              <div className="bg-gradient-to-r from-red-500 to-pink-500 p-8 text-white">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-16 h-16 bg-white/20 backdrop-blur rounded-xl flex items-center justify-center">
+                    <Shield className="w-8 h-8" />
+                  </div>
+                  <div>
+                    <h4 className="text-2xl font-bold">Bảo vệ & Hỗ trợ</h4>
+                    <p className="text-red-100">Hotline 24/7 - Luôn bên bạn</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="p-8">
+                <div className="space-y-4 mb-6">
+                  <div className="flex items-start gap-3">
+                    <div className="w-8 h-8 bg-red-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <Phone className="w-4 h-4 text-red-600" />
+                    </div>
+                    <div>
+                      <h5 className="font-semibold text-gray-900 mb-1">Hotline khẩn cấp 1900 xxxx</h5>
+                      <p className="text-sm text-gray-600">Hỗ trợ ngay khi gặp sự cố: tai nạn, quấy rối, tranh chấp lương</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-3">
+                    <div className="w-8 h-8 bg-red-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <AlertTriangle className="w-4 h-4 text-red-600" />
+                    </div>
+                    <div>
+                      <h5 className="font-semibold text-gray-900 mb-1">Báo cáo sự việc dễ dàng</h5>
+                      <p className="text-sm text-gray-600">8 loại vấn đề: lương, an toàn, quấy rối, điều kiện làm việc...</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-3">
+                    <div className="w-8 h-8 bg-red-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <CheckCircle2 className="w-4 h-4 text-red-600" />
+                    </div>
+                    <div>
+                      <h5 className="font-semibold text-gray-900 mb-1">Xử lý nhanh trong 2 giờ</h5>
+                      <p className="text-sm text-gray-600">Chúng tôi xác minh, làm việc với doanh nghiệp và giải quyết</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-4">
+                  <p className="text-sm text-red-900">
+                    <strong>🛡️ Bảo mật tuyệt đối:</strong> Thông tin của bạn được bảo vệ. Chúng tôi đứng về phía người lao động.
+                  </p>
+                </div>
+
+                <Button
+                  className="w-full h-12 bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 text-white cursor-pointer flex items-center justify-center"
+                  onClick={() => {
+                    onSetWorkerView?.('protection');
+                    onNavigate?.('dashboard');
+                  }}
+                >
+                  Tìm hiểu thêm
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </Button>
+              </div>
+            </div>
+
+            {/* Community Forum Card */}
+            <div className="bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-all group cursor-pointer">
+              <div className="bg-gradient-to-r from-blue-500 to-purple-500 p-8 text-white">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-16 h-16 bg-white/20 backdrop-blur rounded-xl flex items-center justify-center">
+                    <MessageSquare className="w-8 h-8" />
+                  </div>
+                  <div>
+                    <h4 className="text-2xl font-bold">Cộng đồng</h4>
+                    <p className="text-blue-100">Hỏi đáp - Chia sẻ kinh nghiệm</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="p-8">
+                <div className="space-y-4 mb-6">
+                  <div className="flex items-start gap-3">
+                    <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <Users className="w-4 h-4 text-blue-600" />
+                    </div>
+                    <div>
+                      <h5 className="font-semibold text-gray-900 mb-1">2,450+ thành viên tích cực</h5>
+                      <p className="text-sm text-gray-600">Cộng đồng người lao động lớn nhất Việt Nam</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-3">
+                    <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <MessageSquare className="w-4 h-4 text-blue-600" />
+                    </div>
+                    <div>
+                      <h5 className="font-semibold text-gray-900 mb-1">156 câu hỏi đã được giải đáp</h5>
+                      <p className="text-sm text-gray-600">Lương, hợp đồng, quyền lợi, tips tìm việc, kinh nghiệm...</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-3">
+                    <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <Star className="w-4 h-4 text-blue-600" />
+                    </div>
+                    <div>
+                      <h5 className="font-semibold text-gray-900 mb-1">38 chuyên gia luật lao động</h5>
+                      <p className="text-sm text-gray-600">Trả lời câu hỏi miễn phí, tư vấn pháp lý chính xác</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-purple-50 border border-purple-200 rounded-lg p-4 mb-4">
+                  <p className="text-sm text-purple-900">
+                    <strong>💬 Học hỏi từ cộng đồng:</strong> Câu hỏi của bạn sẽ được giải đáp trong vòng 1 giờ.
+                  </p>
+                </div>
+
+                <Button
+                  className="w-full h-12 bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white cursor-pointer flex items-center justify-center"
+                  onClick={() => {
+                    onSetWorkerView?.('community');
+                    onNavigate?.('dashboard');
+                  }}
+                >
+                  Tham gia cộng đồng
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </Button>
+              </div>
+            </div>
+          </div>
+
+          {/* Quick Stats */}
+          <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div className="bg-white rounded-xl p-6 text-center shadow-lg">
+              <div className="text-3xl font-bold text-red-600 mb-2">98%</div>
+              <p className="text-sm text-gray-600">Báo cáo được giải quyết</p>
+            </div>
+            <div className="bg-white rounded-xl p-6 text-center shadow-lg">
+              <div className="text-3xl font-bold text-blue-600 mb-2">2h</div>
+              <p className="text-sm text-gray-600">Thời gian phản hồi TB</p>
+            </div>
+            <div className="bg-white rounded-xl p-6 text-center shadow-lg">
+              <div className="text-3xl font-bold text-purple-600 mb-2">2,450+</div>
+              <p className="text-sm text-gray-600">Thành viên cộng đồng</p>
+            </div>
+            <div className="bg-white rounded-xl p-6 text-center shadow-lg">
+              <div className="text-3xl font-bold text-green-600 mb-2">24/7</div>
+              <p className="text-sm text-gray-600">Hỗ trợ không ngừng nghỉ</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Support Section */}
+      <section className="py-16 bg-gradient-to-br from-teal-500 to-cyan-600">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+            Bạn cần hỗ trợ thêm?
+          </h2>
+          <p className="text-white/90 text-lg mb-8">
+            Đội ngũ hỗ trợ của chúng tôi luôn sẵn sàng giúp đỡ bạn 24/7
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Button
+              className="bg-white text-teal-600 hover:bg-gray-50 px-8 py-6 text-lg font-semibold rounded-xl shadow-lg transition-all hover:shadow-xl cursor-pointer"
+              onClick={() => {
+                onSetWorkerView?.('community');
+                onNavigate?.('dashboard');
+              }}
+            >
+              <MessageSquare className="w-5 h-5 mr-2" />
+              Chat với chúng tôi
+            </Button>
+            <Button
+              className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-teal-600 px-8 py-6 text-lg font-semibold rounded-xl shadow-lg transition-all hover:shadow-xl cursor-pointer"
+              onClick={() => {
+                onSetWorkerView?.('protection');
+                onNavigate?.('dashboard');
+              }}
+            >
+              <Phone className="w-5 h-5 mr-2" />
+              Gọi hotline: 1900 xxxx
+            </Button>
           </div>
         </div>
       </section>

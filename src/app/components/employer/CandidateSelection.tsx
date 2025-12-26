@@ -54,8 +54,8 @@ export function CandidateSelection({ jobId, onBack, onNavigate, onLogout }: Cand
   // Mock job data
   const jobInfo = {
     id: jobId,
-    title: 'Nhân viên kho - Ca sáng',
-    location: 'Khu công nghiệp Thăng Long',
+    title: 'Nhân viên pha chế',
+    location: 'Highland Coffee Cầu Giấy, Hà Nội',
     wage: '30,000 VNĐ/giờ',
     shift: '6:00 AM - 2:00 PM',
     workers: { needed: 50, filled: 45 },

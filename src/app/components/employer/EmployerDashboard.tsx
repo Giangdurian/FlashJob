@@ -28,7 +28,9 @@ import {
   Crown,
   Check,
   X,
-  Zap
+  Zap,
+  Shield,
+  BarChart3
 } from 'lucide-react';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
@@ -59,6 +61,16 @@ import {
   SelectTrigger,
   SelectValue,
 } from '../ui/select';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '../ui/tooltip';
+import { AccountManagerChat, AccountManagerChatButton } from './AccountManagerChat';
+import { WorkerReplacementGuarantee } from './WorkerReplacementGuarantee';
+import { JobDetailStatus } from './JobDetailStatus';
+import { AdvancedReports } from './AdvancedReports';
 
 interface EmployerDashboardProps {
   onNavigate: (screen: any) => void;
@@ -70,12 +82,14 @@ interface EmployerDashboardProps {
 export function EmployerDashboard({ onNavigate, onViewJobDetail, onViewJobStatus, onLogout }: EmployerDashboardProps) {
   const [showPostJobDialog, setShowPostJobDialog] = useState(false);
   const [showRatingDialog, setShowRatingDialog] = useState(false);
-  const [showPricingDialog, setShowPricingDialog] = useState(false);
   const [selectedWorker, setSelectedWorker] = useState<any>(null);
   const [ratingValue, setRatingValue] = useState(0);
   const [ratingFeedback, setRatingFeedback] = useState('');
   const [activeTab, setActiveTab] = useState('overview');
-  const [currentPlan, setCurrentPlan] = useState('free');
+  const [showChat, setShowChat] = useState(false);
+  const [showReplacementGuarantee, setShowReplacementGuarantee] = useState(false);
+  const [viewingJobStatusId, setViewingJobStatusId] = useState<number | null>(null);
+  const [showAdvancedReports, setShowAdvancedReports] = useState(false);
 
   // Job posting form state
   const [jobForm, setJobForm] = useState({
@@ -88,7 +102,8 @@ export function EmployerDashboard({ onNavigate, onViewJobDetail, onViewJobStatus
     description: '',
     shiftTime: '',
     duration: '',
-    customShiftTime: ''
+    customShiftTime: '',
+    paymentFrequency: ''
   });
 
   const stats = [
@@ -126,6 +141,8 @@ export function EmployerDashboard({ onNavigate, onViewJobDetail, onViewJobStatus
     {
       id: 1,
       title: 'Nhân viên kho - Ca sáng',
+      company: 'Công ty ABC',
+      companyTier: 'pro',
       status: 'active',
       workers: { filled: 45, needed: 50 },
       location: 'Khu công nghiệp Thăng Long',
@@ -138,6 +155,8 @@ export function EmployerDashboard({ onNavigate, onViewJobDetail, onViewJobStatus
     {
       id: 2,
       title: 'Nhân viên đóng gói',
+      company: 'Công ty ABC',
+      companyTier: 'pro',
       status: 'active',
       workers: { filled: 30, needed: 30 },
       location: 'Nhà máy Bắc Ninh',
@@ -231,7 +250,9 @@ export function EmployerDashboard({ onNavigate, onViewJobDetail, onViewJobStatus
       urgent: false,
       description: '',
       shiftTime: '',
-      duration: ''
+      duration: '',
+      customShiftTime: '',
+      paymentFrequency: ''
     });
   };
 
@@ -252,6 +273,18 @@ export function EmployerDashboard({ onNavigate, onViewJobDetail, onViewJobStatus
   const getFillRate = (filled: number, needed: number) => {
     return Math.round((filled / needed) * 100);
   };
+
+  if (showReplacementGuarantee) {
+    return <WorkerReplacementGuarantee onBack={() => setShowReplacementGuarantee(false)} />;
+  }
+
+  if (viewingJobStatusId !== null) {
+    return <JobDetailStatus jobId={viewingJobStatusId} onBack={() => setViewingJobStatusId(null)} />;
+  }
+
+  if (showAdvancedReports) {
+    return <AdvancedReports onBack={() => setShowAdvancedReports(false)} />;
+  }
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -275,7 +308,7 @@ export function EmployerDashboard({ onNavigate, onViewJobDetail, onViewJobStatus
             </div>
             <div className="flex items-center gap-4">
               <Button
-                onClick={() => setShowPricingDialog(true)}
+                onClick={() => onNavigate('pricing')}
                 className="bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 text-white cursor-pointer"
               >
                 <Crown className="w-4 h-4 mr-2" />
@@ -347,6 +380,30 @@ export function EmployerDashboard({ onNavigate, onViewJobDetail, onViewJobStatus
           })}
         </div>
 
+        {/* Pro Features Banner */}
+        <Card className="mb-8 border-2 border-yellow-200 bg-gradient-to-r from-yellow-50 to-orange-50">
+          <CardContent className="pt-6">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-lg flex items-center justify-center">
+                  <Crown className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-1">Báo cáo chuyên sâu & Dự báo AI</h3>
+                  <p className="text-sm text-gray-600">Xem phân tích chi tiết, dự đoán xu hướng và đề xuất tối ưu từ AI</p>
+                </div>
+              </div>
+              <Button
+                onClick={() => setShowAdvancedReports(true)}
+                className="bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 text-white cursor-pointer"
+              >
+                <BarChart3 className="w-4 h-4 mr-2" />
+                Xem báo cáo
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+
         {/* Action Bar */}
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-4">
@@ -394,7 +451,7 @@ export function EmployerDashboard({ onNavigate, onViewJobDetail, onViewJobStatus
                     <div
                       key={job.id}
                       className="p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors cursor-pointer"
-                      onClick={() => onViewJobStatus?.(job.id)}
+                      onClick={() => setViewingJobStatusId(job.id)}
                     >
                       <div className="flex items-center justify-between mb-2">
                         <div className="flex-1">
@@ -441,6 +498,23 @@ export function EmployerDashboard({ onNavigate, onViewJobDetail, onViewJobStatus
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-2">
                         <h3 className="text-gray-900 text-lg font-semibold">{job.title}</h3>
+                        {job.companyTier && (
+                          <TooltipProvider>
+                            <Tooltip>
+                              <TooltipTrigger asChild>
+                                <span className={`${job.companyTier === 'pro'
+                                  ? 'bg-gradient-to-r from-orange-400 to-orange-500 hover:from-orange-500 hover:to-orange-600'
+                                  : 'bg-blue-500 hover:bg-blue-600'
+                                  } text-white text-[10px] px-2 py-0.5 rounded-full font-medium cursor-pointer inline-block`}>
+                                  {job.companyTier === 'pro' ? 'Pro' : 'Standard'}
+                                </span>
+                              </TooltipTrigger>
+                              <TooltipContent>
+                                <p>{job.companyTier === 'pro' ? 'Gói Premium - Hiển thị ưu tiên' : 'Gói Standard - Hiển thị bình thường'}</p>
+                              </TooltipContent>
+                            </Tooltip>
+                          </TooltipProvider>
+                        )}
                         <Badge
                           className={
                             job.status === 'active'
@@ -580,7 +654,7 @@ export function EmployerDashboard({ onNavigate, onViewJobDetail, onViewJobStatus
                 Tiêu đề công việc *
               </label>
               <Input
-                placeholder="VD: Nhân viên kho - Ca sáng"
+                placeholder="VD: Nhân pha chế"
                 value={jobForm.title}
                 onChange={(e) => setJobForm({ ...jobForm, title: e.target.value })}
               />
@@ -612,10 +686,27 @@ export function EmployerDashboard({ onNavigate, onViewJobDetail, onViewJobStatus
 
             <div>
               <label className="text-sm font-medium text-gray-700 mb-2 block">
+                Trả lương theo *
+              </label>
+              <Select value={jobForm.paymentFrequency} onValueChange={(value) => setJobForm({ ...jobForm, paymentFrequency: value })}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Chọn chu kỳ trả lương" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="daily">Theo ngày</SelectItem>
+                  <SelectItem value="weekly">Theo tuần</SelectItem>
+                  <SelectItem value="biweekly">Theo 2 tuần</SelectItem>
+                  <SelectItem value="monthly">Theo tháng</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div>
+              <label className="text-sm font-medium text-gray-700 mb-2 block">
                 Địa điểm *
               </label>
               <Input
-                placeholder="VD: Khu công nghiệp Thăng Long, Hà Nội"
+                placeholder="VD: Highland Coffee Cầu Giấy, Hà Nội"
                 value={jobForm.location}
                 onChange={(e) => setJobForm({ ...jobForm, location: e.target.value })}
               />
@@ -672,7 +763,7 @@ export function EmployerDashboard({ onNavigate, onViewJobDetail, onViewJobStatus
                 Kỹ năng yêu cầu
               </label>
               <Input
-                placeholder="VD: Giao tiếp tốt, Nhanh nhẹn, Kinh nghiệm kho"
+                placeholder="VD: Giao tiếp tốt, Nhanh nhẹn"
                 value={jobForm.skills}
                 onChange={(e) => setJobForm({ ...jobForm, skills: e.target.value })}
               />
@@ -777,186 +868,11 @@ export function EmployerDashboard({ onNavigate, onViewJobDetail, onViewJobStatus
         </DialogContent>
       </Dialog>
 
-      {/* Pricing Dialog */}
-      <Dialog open={showPricingDialog} onOpenChange={setShowPricingDialog}>
-        <DialogContent className="max-w-6xl max-h-[90vh] overflow-y-auto">
-          <DialogHeader>
-            <DialogTitle className="text-2xl font-bold text-center flex items-center justify-center gap-2">
-              <Crown className="w-6 h-6 text-yellow-500" />
-              Nâng cấp tài khoản FlashJob Business
-            </DialogTitle>
-            <DialogDescription className="text-center text-lg">
-              Chọn gói phù hợp để tối ưu hiệu quả tuyển dụng của bạn
-            </DialogDescription>
-          </DialogHeader>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 py-6">
-            {/* Free Plan */}
-            <div className={`border-2 rounded-lg p-6 ${currentPlan === 'free' ? 'border-gray-400 bg-gray-50' : 'border-gray-200'}`}>
-              <div className="text-center mb-6">
-                <h3 className="text-xl font-bold text-gray-900 mb-2">Miễn phí</h3>
-                <div className="text-3xl font-bold text-gray-900 mb-1">0đ</div>
-                <p className="text-gray-600">Dùng thử cơ bản</p>
-              </div>
-              
-              <div className="space-y-3 mb-6">
-                <div className="flex items-start gap-2">
-                  <X className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-gray-700">Không ưu tiên hiển thị</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
-                  <span className="text-gray-700">Giới hạn 5 tin tuyển dụng/tháng</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
-                  <span className="text-gray-700">Quản lý ứng viên cơ bản</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
-                  <span className="text-gray-700">Báo cáo thống kê đơn giản</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <X className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-gray-700">Không hỗ trợ khẩn cấp</span>
-                </div>
-              </div>
-              
-              <Button
-                disabled={currentPlan === 'free'}
-                onClick={() => setCurrentPlan('free')}
-                variant="outline"
-                className="w-full cursor-pointer"
-              >
-                {currentPlan === 'free' ? 'Gói hiện tại' : 'Chọn gói này'}
-              </Button>
-            </div>
+      {/* Account Manager Chat */}
+      <AccountManagerChat isOpen={showChat} onClose={() => setShowChat(false)} />
 
-            {/* Basic Plan */}
-            <div className={`border-2 rounded-lg p-6 ${currentPlan === 'basic' ? 'border-blue-500 bg-blue-50' : 'border-gray-200'} relative`}>
-              <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-blue-600 text-white px-4 py-1 rounded-full text-sm font-semibold">
-                Phổ biến
-              </div>
-              <div className="text-center mb-6">
-                <h3 className="text-xl font-bold text-gray-900 mb-2">Basic</h3>
-                <div className="text-3xl font-bold text-blue-600 mb-1">300,000đ</div>
-                <p className="text-gray-600">Mỗi tháng</p>
-              </div>
-              
-              <div className="space-y-3 mb-6">
-                <div className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
-                  <span className="text-gray-700 font-semibold">Ưu tiên hiển thị tin tuyển dụng</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
-                  <span className="text-gray-700">Đăng 20 tin tuyển dụng/tháng</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
-                  <span className="text-gray-700">Badge "Nhà tuyển dụng uy tín"</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
-                  <span className="text-gray-700">Quản lý ứng viên nâng cao</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
-                  <span className="text-gray-700">Báo cáo phân tích chi tiết</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
-                  <span className="text-gray-700">Hỗ trợ qua email</span>
-                </div>
-              </div>
-              
-              <Button
-                disabled={currentPlan === 'basic'}
-                onClick={() => setCurrentPlan('basic')}
-                className="w-full bg-blue-600 hover:bg-blue-700 cursor-pointer"
-              >
-                {currentPlan === 'basic' ? 'Gói hiện tại' : 'Nâng cấp ngay'}
-              </Button>
-            </div>
-
-            {/* Pro Plan */}
-            <div className={`border-2 rounded-lg p-6 ${currentPlan === 'pro' ? 'border-yellow-500 bg-gradient-to-b from-yellow-50 to-orange-50' : 'border-gray-200'} relative`}>
-              <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-gradient-to-r from-yellow-500 to-orange-500 text-white px-4 py-1 rounded-full text-sm font-semibold flex items-center gap-1">
-                <Crown className="w-4 h-4" />
-                Premium
-              </div>
-              <div className="text-center mb-6">
-                <h3 className="text-xl font-bold text-gray-900 mb-2">Pro</h3>
-                <div className="text-3xl font-bold bg-gradient-to-r from-yellow-600 to-orange-600 bg-clip-text text-transparent mb-1">800,000đ</div>
-                <p className="text-gray-600">Mỗi tháng</p>
-              </div>
-              
-              <div className="space-y-3 mb-6">
-                <div className="flex items-start gap-2">
-                  <Zap className="w-5 h-5 text-yellow-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-gray-700 font-semibold">Ưu tiên tiếp cận người lao động phù hợp</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
-                  <span className="text-gray-700 font-semibold">Đăng bài không giới hạn</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
-                  <span className="text-gray-700 font-semibold">Hỗ trợ chấm công tự động trên app</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
-                  <span className="text-gray-700">Badge "Đối tác Premium"</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
-                  <span className="text-gray-700">AI gợi ý ứng viên phù hợp</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
-                  <span className="text-gray-700">Quản lý thanh toán tự động</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
-                  <span className="text-gray-700">Báo cáo chuyên sâu & dự báo</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
-                  <span className="text-gray-700">Hỗ trợ ưu tiên 24/7</span>
-                </div>
-              </div>
-              
-              <Button
-                disabled={currentPlan === 'pro'}
-                onClick={() => setCurrentPlan('pro')}
-                className="w-full bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 cursor-pointer"
-              >
-                {currentPlan === 'pro' ? 'Gói hiện tại' : 'Nâng cấp ngay'}
-              </Button>
-            </div>
-          </div>
-
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 text-center">
-            <p className="text-gray-700">
-              <strong>Lưu ý:</strong> Mọi thay đổi gói sẽ có hiệu lực ngay lập tức. 
-              Bạn có thể hủy hoặc nâng cấp bất cứ lúc nào.
-            </p>
-          </div>
-
-          <DialogFooter className="flex justify-between items-center">
-            <p className="text-sm text-gray-600">
-              Cần tư vấn? Liên hệ: <span className="text-blue-600 font-semibold">1900-xxxx</span>
-            </p>
-            <Button
-              variant="outline"
-              onClick={() => setShowPricingDialog(false)}
-              className="cursor-pointer"
-            >
-              Đóng
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+      {/* Chat Button - only show when chat is closed */}
+      {!showChat && <AccountManagerChatButton onClick={() => setShowChat(true)} />}
     </div>
   );
 }

@@ -41,9 +41,10 @@ interface JobDetailProps {
   onBack: () => void;
   onNavigate?: (screen: any) => void;
   onLogout?: () => void;
+  onSetWorkerView?: (view: 'dashboard' | 'training' | 'withdraw' | 'protection' | 'community') => void;
 }
 
-export function JobDetail({ jobId, onBack, onNavigate, onLogout }: JobDetailProps) {
+export function JobDetail({ jobId, onBack, onNavigate, onLogout, onSetWorkerView }: JobDetailProps) {
   const [showApplyModal, setShowApplyModal] = useState(false);
   const [applicationData, setApplicationData] = useState({
     name: '',
@@ -161,7 +162,10 @@ export function JobDetail({ jobId, onBack, onNavigate, onLogout }: JobDetailProp
                     </div>
                   </DropdownMenuLabel>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem onClick={() => onNavigate?.('dashboard')} className="cursor-pointer">
+                  <DropdownMenuItem onClick={() => {
+                    onSetWorkerView?.('dashboard');
+                    onNavigate?.('dashboard');
+                  }} className="cursor-pointer">
                     <User className="w-4 h-4 mr-2" />
                     Hồ sơ của tôi
                   </DropdownMenuItem>

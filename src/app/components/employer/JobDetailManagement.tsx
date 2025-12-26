@@ -67,7 +67,7 @@ export function JobDetailManagement({ jobId, onBack, onNavigate, onLogout }: Job
   const jobInfo = {
     id: jobId,
     title: 'Nhân viên kho - Ca sáng',
-    location: 'Khu công nghiệp Thăng Long',
+    location: 'Highland Coffee Cầu Giấy, Hà Nội',
     date: '25/12/2025',
     shift: '6:00 AM - 2:00 PM',
     wage: '30,000 VNĐ/giờ',

@@ -7,9 +7,10 @@ import { UtilitiesGuide } from './components/worker/UtilitiesGuide';
 import { EmployerDashboard } from './components/employer/EmployerDashboard';
 import { JobDetailManagement } from './components/employer/JobDetailManagement';
 import { CandidateSelection } from './components/employer/CandidateSelection';
+import { PricingPage } from './components/employer/PricingPage';
 import { LoginPage } from './components/auth/LoginPage';
 
-type Screen = 'landing' | 'jobs' | 'dashboard' | 'job-detail' | 'utilities' | 'employer' | 'employer-job-detail' | 'candidate-selection' | 'login';
+type Screen = 'landing' | 'jobs' | 'dashboard' | 'job-detail' | 'utilities' | 'employer' | 'employer-job-detail' | 'candidate-selection' | 'pricing' | 'login';
 type UserRole = 'worker' | 'employer' | null;
 
 export default function App() {
@@ -19,6 +20,8 @@ export default function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [userRole, setUserRole] = useState<UserRole>(null);
   const [defaultLoginRole, setDefaultLoginRole] = useState<'worker' | 'employer'>('worker');
+  const [workerDashboardView, setWorkerDashboardView] = useState<'dashboard' | 'training' | 'withdraw' | 'protection' | 'community'>('dashboard');
+  const [workerReturnScreen, setWorkerReturnScreen] = useState<'landing' | 'dashboard'>('dashboard');
 
   const handleLogin = (role: 'worker' | 'employer') => {
     setIsAuthenticated(true);
@@ -68,17 +71,19 @@ export default function App() {
 
     switch (activeScreen) {
       case 'landing':
-        return <LandingPage onViewJobs={handleViewJobs} onNavigate={setActiveScreen} onLogout={handleLogout} onViewJobDetail={handleViewJobDetail} onNavigateToLogin={handleNavigateToLogin} />;
+        return <LandingPage onViewJobs={handleViewJobs} onNavigate={setActiveScreen} onLogout={handleLogout} onViewJobDetail={handleViewJobDetail} onNavigateToLogin={handleNavigateToLogin} onSetWorkerView={(view) => { setWorkerDashboardView(view); setWorkerReturnScreen('landing'); }} />;
       case 'jobs':
-        return <JobListings onViewJobDetail={handleViewJobDetail} onNavigate={setActiveScreen} onLogout={handleLogout} />;
+        return <JobListings onViewJobDetail={handleViewJobDetail} onNavigate={setActiveScreen} onLogout={handleLogout} onSetWorkerView={(view) => { setWorkerDashboardView(view); setWorkerReturnScreen('landing'); }} />;
       case 'dashboard':
-        return <WorkerDashboard onNavigate={setActiveScreen} onLogout={handleLogout} />;
+        return <WorkerDashboard onNavigate={setActiveScreen} onLogout={handleLogout} initialView={workerDashboardView} returnScreen={workerReturnScreen} />;
       case 'job-detail':
-        return <JobDetail jobId={selectedJobId} onBack={() => setActiveScreen('jobs')} onNavigate={setActiveScreen} onLogout={handleLogout} />;
+        return <JobDetail jobId={selectedJobId} onBack={() => setActiveScreen('jobs')} onNavigate={setActiveScreen} onLogout={handleLogout} onSetWorkerView={setWorkerDashboardView} />;
       case 'utilities':
-        return <UtilitiesGuide onBack={() => setActiveScreen('landing')} onNavigate={setActiveScreen} onLogout={handleLogout} />;
+        return <UtilitiesGuide onBack={() => setActiveScreen('landing')} onNavigate={setActiveScreen} onLogout={handleLogout} onSetWorkerView={setWorkerDashboardView} />;
       case 'employer':
         return <EmployerDashboard onNavigate={setActiveScreen} onViewJobDetail={handleViewCandidates} onViewJobStatus={handleViewJobStatus} onLogout={handleLogout} />;
+      case 'pricing':
+        return <PricingPage onNavigate={setActiveScreen} onLogout={handleLogout} currentPlan="pro" userRole={userRole || 'employer'} />;
       case 'employer-job-detail':
         return <JobDetailManagement jobId={selectedEmployerJobId || 1} onBack={() => setActiveScreen('employer')} onNavigate={setActiveScreen} onLogout={handleLogout} />;
       case 'candidate-selection':

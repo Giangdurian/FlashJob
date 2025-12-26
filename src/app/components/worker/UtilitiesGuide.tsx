@@ -34,9 +34,10 @@ interface UtilitiesGuideProps {
   onBack: () => void;
   onNavigate?: (screen: any) => void;
   onLogout?: () => void;
+  onSetWorkerView?: (view: 'dashboard' | 'training' | 'withdraw' | 'protection' | 'community') => void;
 }
 
-export function UtilitiesGuide({ onBack, onNavigate, onLogout }: UtilitiesGuideProps) {
+export function UtilitiesGuide({ onBack, onNavigate, onLogout, onSetWorkerView }: UtilitiesGuideProps) {
   const guides = [
     {
       category: 'Hướng dẫn làm việc',
@@ -189,7 +190,10 @@ export function UtilitiesGuide({ onBack, onNavigate, onLogout }: UtilitiesGuideP
                     </div>
                   </DropdownMenuLabel>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem onClick={() => onNavigate?.('dashboard')} className="cursor-pointer">
+                  <DropdownMenuItem onClick={() => {
+                    onSetWorkerView?.('dashboard');
+                    onNavigate?.('dashboard');
+                  }} className="cursor-pointer">
                     <User className="w-4 h-4 mr-2" />
                     Hồ sơ của tôi
                   </DropdownMenuItem>

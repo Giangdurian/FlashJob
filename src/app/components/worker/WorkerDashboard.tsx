@@ -17,8 +17,15 @@ import {
   Edit,
   ChevronDown,
   LogOut,
-  Settings
+  Settings,
+  GraduationCap,
+  Zap,
+  MessageSquare
 } from 'lucide-react';
+import { TrainingProgram } from './TrainingProgram';
+import { EarlyWithdraw } from './EarlyWithdraw';
+import { WorkerProtection } from './WorkerProtection';
+import { CommunityForum } from './CommunityForum';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { Textarea } from '../ui/textarea';
@@ -45,14 +52,45 @@ import {
 interface WorkerDashboardProps {
   onNavigate: (screen: any) => void;
   onLogout?: () => void;
+  initialView?: 'dashboard' | 'training' | 'withdraw' | 'protection' | 'community';
+  returnScreen?: 'landing' | 'dashboard';
 }
 
-export function WorkerDashboard({ onNavigate, onLogout }: WorkerDashboardProps) {
+export function WorkerDashboard({ onNavigate, onLogout, initialView = 'dashboard', returnScreen = 'dashboard' }: WorkerDashboardProps) {
   const [isEditingProfile, setIsEditingProfile] = useState(false);
   const [showRatingDialog, setShowRatingDialog] = useState(false);
   const [selectedJob, setSelectedJob] = useState<any>(null);
   const [ratingValue, setRatingValue] = useState(0);
   const [feedback, setFeedback] = useState('');
+  const [currentView, setCurrentView] = useState<'dashboard' | 'training' | 'withdraw' | 'protection' | 'community'>(initialView);
+
+  const handleBack = () => {
+    if (returnScreen === 'landing') {
+      onNavigate('landing');
+    } else {
+      setCurrentView('dashboard');
+    }
+  };
+
+  // Show Training Program
+  if (currentView === 'training') {
+    return <TrainingProgram onBack={handleBack} />;
+  }
+
+  // Show Early Withdraw
+  if (currentView === 'withdraw') {
+    return <EarlyWithdraw onBack={handleBack} />;
+  }
+
+  // Show Worker Protection
+  if (currentView === 'protection') {
+    return <WorkerProtection onBack={handleBack} />;
+  }
+
+  // Show Community Forum
+  if (currentView === 'community') {
+    return <CommunityForum onBack={handleBack} />;
+  }
 
   const handleRateJob = (job: any) => {
     setSelectedJob(job);
@@ -191,6 +229,34 @@ export function WorkerDashboard({ onNavigate, onLogout }: WorkerDashboardProps) 
                   Việc làm
                 </button>
                 <button
+                  onClick={() => setCurrentView('training')}
+                  className="text-gray-700 hover:text-green-600 cursor-pointer transition-colors flex items-center gap-1"
+                >
+                  <GraduationCap className="w-4 h-4" />
+                  Đào tạo nghề
+                </button>
+                <button
+                  onClick={() => setCurrentView('withdraw')}
+                  className="text-gray-700 hover:text-green-600 cursor-pointer transition-colors flex items-center gap-1"
+                >
+                  <Zap className="w-4 h-4" />
+                  Rút lương sớm
+                </button>
+                <button
+                  onClick={() => setCurrentView('protection')}
+                  className="text-gray-700 hover:text-red-600 cursor-pointer transition-colors flex items-center gap-1"
+                >
+                  <Shield className="w-4 h-4" />
+                  Bảo vệ & Hỗ trợ
+                </button>
+                <button
+                  onClick={() => setCurrentView('community')}
+                  className="text-gray-700 hover:text-purple-600 cursor-pointer transition-colors flex items-center gap-1"
+                >
+                  <MessageSquare className="w-4 h-4" />
+                  Cộng đồng
+                </button>
+                <button
                   onClick={() => onNavigate('utilities')}
                   className="text-gray-700 hover:text-green-600 cursor-pointer transition-colors"
                 >
@@ -219,7 +285,7 @@ export function WorkerDashboard({ onNavigate, onLogout }: WorkerDashboardProps) 
                     </div>
                   </DropdownMenuLabel>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem className="cursor-pointer">
+                  <DropdownMenuItem onClick={() => setCurrentView('dashboard')} className="cursor-pointer">
                     <User className="w-4 h-4 mr-2" />
                     Hồ sơ của tôi
                   </DropdownMenuItem>
@@ -351,7 +417,44 @@ export function WorkerDashboard({ onNavigate, onLogout }: WorkerDashboardProps) 
                       <p className="text-gray-900 mt-1">{profile.rating} / 5.0</p>
                     </div>
                     <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center">
-                      <Star className="w-6 h-6 text-yellow-600 fill-yellow-600" />
+                      <Star className="w-6 h-6 text-yellow-600" />
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Quick Access Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <Card className="border-2 border-blue-200 bg-gradient-to-br from-blue-50 to-blue-100 hover:shadow-lg transition-all cursor-pointer" onClick={() => setCurrentView('training')}>
+                <CardContent className="pt-6">
+                  <div className="flex items-center gap-4">
+                    <div className="w-16 h-16 bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <GraduationCap className="w-8 h-8 text-white" />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-blue-900 font-semibold mb-1">Đào tạo nghề</h3>
+                      <p className="text-sm text-blue-700">Nâng cao kỹ năng với các khóa học chất lượng</p>
+                      <Badge className="mt-2 bg-blue-200 text-blue-800 hover:bg-blue-200">
+                        5 khóa học mới
+                      </Badge>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card className="border-2 border-green-200 bg-gradient-to-br from-green-50 to-emerald-100 hover:shadow-lg transition-all cursor-pointer" onClick={() => setCurrentView('withdraw')}>
+                <CardContent className="pt-6">
+                  <div className="flex items-center gap-4">
+                    <div className="w-16 h-16 bg-green-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <Zap className="w-8 h-8 text-white" />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-green-900 font-semibold mb-1">Rút lương sớm</h3>
+                      <p className="text-sm text-green-700">Rút tiền công đã làm ngay lập tức</p>
+                      <Badge className="mt-2 bg-green-200 text-green-800 hover:bg-green-200">
+                        Phí 1.5%
+                      </Badge>
                     </div>
                   </div>
                 </CardContent>
