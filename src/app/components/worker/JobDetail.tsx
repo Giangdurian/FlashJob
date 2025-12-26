@@ -42,9 +42,12 @@ interface JobDetailProps {
   onNavigate?: (screen: any) => void;
   onLogout?: () => void;
   onSetWorkerView?: (view: 'dashboard' | 'training' | 'withdraw' | 'protection' | 'community') => void;
+  isAuthenticated?: boolean;
+  onNavigateToLogin?: (role: 'worker' | 'employer') => void;
+  onViewCompany?: (companyName: string) => void;
 }
 
-export function JobDetail({ jobId, onBack, onNavigate, onLogout, onSetWorkerView }: JobDetailProps) {
+export function JobDetail({ jobId, onBack, onNavigate, onLogout, onSetWorkerView, isAuthenticated = false, onNavigateToLogin, onViewCompany }: JobDetailProps) {
   const [showApplyModal, setShowApplyModal] = useState(false);
   const [applicationData, setApplicationData] = useState({
     name: '',
@@ -227,7 +230,12 @@ export function JobDetail({ jobId, onBack, onNavigate, onLogout, onSetWorkerView
                           )}
                         </div>
                         <h2 className="text-gray-900 mb-2">{job.title}</h2>
-                        <h3 className="text-gray-700">{job.company}</h3>
+                        <button
+                          onClick={() => onViewCompany?.(job.company)}
+                          className="text-gray-700 hover:text-green-600 transition-colors cursor-pointer font-medium text-left"
+                        >
+                          {job.company}
+                        </button>
                       </div>
 
                       <div className="flex gap-2">
@@ -445,7 +453,13 @@ export function JobDetail({ jobId, onBack, onNavigate, onLogout, onSetWorkerView
                   </div>
 
                   <Button
-                    onClick={() => setShowApplyModal(true)}
+                    onClick={() => {
+                      if (isAuthenticated) {
+                        setShowApplyModal(true);
+                      } else {
+                        onNavigateToLogin?.('worker');
+                      }
+                    }}
                     className="w-full bg-green-600 hover:bg-green-700 cursor-pointer"
                     size="lg"
                   >

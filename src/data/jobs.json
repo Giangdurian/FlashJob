@@ -641,6 +641,551 @@
           "rate": "40,000 VND/giờ"
         }
       ]
+    },
+    {
+      "id": 13,
+      "title": "Nhân Viên Giao Hàng - Lazada",
+      "company": "LAZADA VIỆT NAM",
+      "companyLogo": "LZ",
+      "companyTier": "pro",
+      "location": "Hà Nội",
+      "salary": "38,000 - 48,000 VNĐ/giờ",
+      "duration": "1-3 tháng",
+      "badge": "HOT",
+      "urgent": true,
+      "instantPay": true,
+      "postedTime": "Thanh toán hàng tuần",
+      "postedDate": "2025-12-22",
+      "expiryDate": "2026-03-22",
+      "openings": 40,
+      "applied": 195,
+      "companyRating": 4.4,
+      "companyReviews": 312,
+      "companyDescription": "Lazada là nền tảng thương mại điện tử hàng đầu Đông Nam Á, cung cấp trải nghiệm mua sắm trực tuyến tuyệt vời.",
+      "requirements": [
+        "Có xe máy và bằng lái xe",
+        "Sức khỏe tốt, chịu được áp lực",
+        "Trung thực, nhiệt tình"
+      ],
+      "responsibilities": [
+        "Giao hàng đúng hạn cho khách",
+        "Thu tiền và đối soát cuối ngày",
+        "Báo cáo tình trạng đơn hàng",
+        "Giữ gìn hàng hóa cẩn thận"
+      ],
+      "benefits": [
+        "Lương cao + thưởng hiệu suất",
+        "Hỗ trợ xăng xe",
+        "Bảo hiểm tai nạn",
+        "Môi trường làm việc năng động"
+      ],
+      "shifts": [
+        {
+          "time": "Ca sáng",
+          "hours": "7:00 - 13:00",
+          "rate": "38,000 VND/giờ"
+        },
+        {
+          "time": "Ca chiều",
+          "hours": "13:00 - 19:00",
+          "rate": "42,000 VND/giờ"
+        },
+        {
+          "time": "Cả ngày",
+          "hours": "7:00 - 19:00",
+          "rate": "48,000 VND/giờ"
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "title": "Pha Chế - The Coffee House",
+      "company": "THE COFFEE HOUSE",
+      "companyLogo": "TC",
+      "companyTier": "standard",
+      "location": "Hà Nội",
+      "salary": "28,000 - 35,000 VNĐ/giờ",
+      "duration": "3-6 tháng",
+      "badge": null,
+      "urgent": false,
+      "instantPay": false,
+      "postedTime": "Làm việc trong môi trường chuyên nghiệp",
+      "postedDate": "2025-12-20",
+      "expiryDate": "2026-06-20",
+      "openings": 15,
+      "applied": 89,
+      "companyRating": 4.6,
+      "companyReviews": 267,
+      "companyDescription": "The Coffee House là chuỗi cà phê nổi tiếng tại Việt Nam với không gian hiện đại và đồ uống chất lượng.",
+      "requirements": [
+        "Có kinh nghiệm pha chế là lợi thế",
+        "Giao tiếp tốt, thân thiện",
+        "Chịu được áp lực công việc"
+      ],
+      "responsibilities": [
+        "Pha chế các loại đồ uống theo menu",
+        "Phục vụ khách hàng nhiệt tình",
+        "Giữ khu vực làm việc sạch sẽ",
+        "Báo cáo tình trạng nguyên liệu"
+      ],
+      "benefits": [
+        "Được đào tạo kỹ năng pha chế",
+        "Môi trường làm việc thân thiện",
+        "Giảm giá đồ uống",
+        "Cơ hội thăng tiến"
+      ],
+      "shifts": [
+        {
+          "time": "Ca sáng",
+          "hours": "6:00 - 12:00",
+          "rate": "28,000 VND/giờ"
+        },
+        {
+          "time": "Ca chiều",
+          "hours": "12:00 - 18:00",
+          "rate": "30,000 VND/giờ"
+        },
+        {
+          "time": "Ca tối",
+          "hours": "18:00 - 22:00",
+          "rate": "35,000 VND/giờ"
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "title": "Nhân Viên Bán Hàng - Circle K",
+      "company": "CIRCLE K",
+      "companyLogo": "CK",
+      "companyTier": "standard",
+      "location": "Hà Nội",
+      "salary": "25,000 - 32,000 VNĐ/giờ",
+      "duration": "3-6 tháng",
+      "badge": null,
+      "urgent": false,
+      "instantPay": false,
+      "postedTime": "Ca đêm có phụ cấp",
+      "postedDate": "2025-12-19",
+      "expiryDate": "2026-06-19",
+      "openings": 20,
+      "applied": 124,
+      "companyRating": 4.2,
+      "companyReviews": 198,
+      "companyDescription": "Circle K là chuỗi cửa hàng tiện lợi 24/7 hàng đầu với hơn 400 cửa hàng trên toàn quốc.",
+      "requirements": [
+        "Độ tuổi 18-35",
+        "Trung thực, chăm chỉ",
+        "Có thể làm ca đêm"
+      ],
+      "responsibilities": [
+        "Bán hàng và tư vấn khách hàng",
+        "Sắp xếp hàng hóa trên kệ",
+        "Kiểm kê và báo cáo cuối ca",
+        "Vệ sinh cửa hàng"
+      ],
+      "benefits": [
+        "Lương ổn định + thưởng",
+        "Phụ cấp ca đêm cao",
+        "Được đào tạo kỹ năng bán hàng",
+        "Làm việc tại cửa hàng gần nhà"
+      ],
+      "shifts": [
+        {
+          "time": "Ca sáng",
+          "hours": "6:00 - 14:00",
+          "rate": "25,000 VND/giờ"
+        },
+        {
+          "time": "Ca chiều",
+          "hours": "14:00 - 22:00",
+          "rate": "28,000 VND/giờ"
+        },
+        {
+          "time": "Ca đêm",
+          "hours": "22:00 - 6:00",
+          "rate": "32,000 VND/giờ"
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "title": "Nhân Viên Pha Chế - Highlands Coffee",
+      "company": "HIGHLANDS COFFEE",
+      "companyLogo": "HC",
+      "companyTier": "standard",
+      "location": "Hà Nội",
+      "salary": "30,000 - 38,000 VNĐ/giờ",
+      "duration": "3-6 tháng",
+      "badge": null,
+      "urgent": false,
+      "instantPay": false,
+      "postedTime": "Môi trường chuyên nghiệp",
+      "postedDate": "2025-12-21",
+      "expiryDate": "2026-06-21",
+      "openings": 18,
+      "applied": 156,
+      "companyRating": 4.7,
+      "companyReviews": 423,
+      "companyDescription": "Highlands Coffee là thương hiệu cà phê Việt Nam hàng đầu với hơn 500 cửa hàng trên toàn quốc.",
+      "requirements": [
+        "Yêu thích ngành F&B",
+        "Giao tiếp tốt, nhiệt tình",
+        "Có thể làm việc ca xoay"
+      ],
+      "responsibilities": [
+        "Pha chế đồ uống theo tiêu chuẩn",
+        "Phục vụ và tư vấn khách hàng",
+        "Dọn dẹp khu vực làm việc",
+        "Hỗ trợ đồng nghiệp khi cần"
+      ],
+      "benefits": [
+        "Đào tạo chuyên nghiệp",
+        "Lương cạnh tranh + tips",
+        "Giảm giá đồ uống 50%",
+        "Cơ hội thăng tiến nhanh"
+      ],
+      "shifts": [
+        {
+          "time": "Ca sáng",
+          "hours": "6:00 - 12:00",
+          "rate": "30,000 VND/giờ"
+        },
+        {
+          "time": "Ca chiều",
+          "hours": "12:00 - 18:00",
+          "rate": "33,000 VND/giờ"
+        },
+        {
+          "time": "Ca tối",
+          "hours": "18:00 - 22:00",
+          "rate": "38,000 VND/giờ"
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "title": "Shipper Giao Hàng - GHN Express",
+      "company": "GHN EXPRESS",
+      "companyLogo": "GH",
+      "companyTier": "standard",
+      "location": "Hà Nội",
+      "salary": "35,000 - 45,000 VNĐ/giờ",
+      "duration": "1-3 tháng",
+      "badge": "HOT",
+      "urgent": true,
+      "instantPay": true,
+      "postedTime": "Thanh toán hàng tuần",
+      "postedDate": "2025-12-22",
+      "expiryDate": "2026-03-22",
+      "openings": 35,
+      "applied": 203,
+      "companyRating": 4.3,
+      "companyReviews": 289,
+      "companyDescription": "GHN Express là đơn vị giao vận hàng đầu Việt Nam với mạng lưới rộng khắp 63 tỉnh thành.",
+      "requirements": [
+        "Có xe máy và bằng lái xe",
+        "Biết đường phố Hà Nội",
+        "Sức khỏe tốt"
+      ],
+      "responsibilities": [
+        "Nhận và giao hàng đúng hạn",
+        "Thu tiền và đối soát",
+        "Chăm sóc khách hàng",
+        "Báo cáo công việc hàng ngày"
+      ],
+      "benefits": [
+        "Lương cao + thưởng KPI",
+        "Hỗ trợ xăng xe và bảo dưỡng",
+        "Bảo hiểm tai nạn 24/7",
+        "Thưởng tháng 13"
+      ],
+      "shifts": [
+        {
+          "time": "Ca sáng",
+          "hours": "7:00 - 13:00",
+          "rate": "35,000 VND/giờ"
+        },
+        {
+          "time": "Ca chiều",
+          "hours": "13:00 - 19:00",
+          "rate": "40,000 VND/giờ"
+        },
+        {
+          "time": "Cả ngày",
+          "hours": "7:00 - 19:00",
+          "rate": "45,000 VND/giờ"
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "title": "Nhân Viên Thu Ngân - VinMart",
+      "company": "VINMART",
+      "companyLogo": "VM",
+      "companyTier": "pro",
+      "location": "Hà Nội",
+      "salary": "30,000 - 38,000 VNĐ/giờ",
+      "duration": "3-6 tháng",
+      "badge": null,
+      "urgent": false,
+      "instantPay": false,
+      "postedTime": "Ca linh hoạt",
+      "postedDate": "2025-12-22",
+      "expiryDate": "2026-06-22",
+      "openings": 15,
+      "applied": 87,
+      "companyRating": 4.5,
+      "companyReviews": 189,
+      "companyDescription": "VinMart là hệ thống siêu thị hàng đầu Việt Nam với hơn 3,000 cửa hàng trên toàn quốc.",
+      "requirements": [
+        "Tốt nghiệp THPT trở lên",
+        "Kỹ năng tính toán nhanh",
+        "Giao tiếp tốt với khách hàng"
+      ],
+      "responsibilities": [
+        "Thu tiền và trả lại tiền thừa",
+        "Kiểm tra mã vạch sản phẩm",
+        "Hỗ trợ khách hàng thanh toán",
+        "Báo cáo doanh thu cuối ca"
+      ],
+      "benefits": [
+        "Lương ổn định + thưởng doanh số",
+        "Đào tạo kỹ năng nghiệp vụ",
+        "Giảm giá khi mua sắm tại VinMart",
+        "Môi trường làm việc chuyên nghiệp"
+      ],
+      "shifts": [
+        {
+          "time": "Ca sáng",
+          "hours": "7:00 - 14:00",
+          "rate": "30,000 VND/giờ"
+        },
+        {
+          "time": "Ca chiều",
+          "hours": "14:00 - 21:00",
+          "rate": "35,000 VND/giờ"
+        },
+        {
+          "time": "Ca tối",
+          "hours": "17:00 - 22:00",
+          "rate": "38,000 VND/giờ"
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "title": "Nhân Viên Bán Hàng - VinMart",
+      "company": "VINMART",
+      "companyLogo": "VM",
+      "companyTier": "pro",
+      "location": "Hà Nội",
+      "salary": "28,000 - 35,000 VNĐ/giờ",
+      "duration": "3-6 tháng",
+      "badge": null,
+      "urgent": false,
+      "instantPay": false,
+      "postedTime": "Nhiều vị trí",
+      "postedDate": "2025-12-21",
+      "expiryDate": "2026-06-21",
+      "openings": 30,
+      "applied": 156,
+      "companyRating": 4.5,
+      "companyReviews": 189,
+      "companyDescription": "VinMart là hệ thống siêu thị hàng đầu Việt Nam với hơn 3,000 cửa hàng trên toàn quốc.",
+      "requirements": [
+        "Thái độ nhiệt tình, thân thiện",
+        "Sẵn sàng học hỏi",
+        "Có thể làm ca xoay"
+      ],
+      "responsibilities": [
+        "Tư vấn và giới thiệu sản phẩm",
+        "Sắp xếp hàng hóa trên kệ",
+        "Kiểm tra hạn sử dụng sản phẩm",
+        "Hỗ trợ khách hàng tìm sản phẩm"
+      ],
+      "benefits": [
+        "Lương cơ bản + hoa hồng bán hàng",
+        "Được đào tạo kỹ năng bán hàng",
+        "Thưởng theo hiệu suất",
+        "Bảo hiểm y tế"
+      ],
+      "shifts": [
+        {
+          "time": "Ca sáng",
+          "hours": "6:00 - 13:00",
+          "rate": "28,000 VND/giờ"
+        },
+        {
+          "time": "Ca chiều",
+          "hours": "13:00 - 20:00",
+          "rate": "32,000 VND/giờ"
+        },
+        {
+          "time": "Ca tối",
+          "hours": "16:00 - 22:00",
+          "rate": "35,000 VND/giờ"
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "title": "Nhân Viên Bảo Vệ - VinMart",
+      "company": "VINMART",
+      "companyLogo": "VM",
+      "companyTier": "pro",
+      "location": "Hà Nội",
+      "salary": "32,000 - 40,000 VNĐ/giờ",
+      "duration": "6-12 tháng",
+      "badge": null,
+      "urgent": true,
+      "instantPay": false,
+      "postedTime": "Ca đêm có phụ cấp",
+      "postedDate": "2025-12-20",
+      "expiryDate": "2026-12-20",
+      "openings": 10,
+      "applied": 45,
+      "companyRating": 4.5,
+      "companyReviews": 189,
+      "companyDescription": "VinMart là hệ thống siêu thị hàng đầu Việt Nam với hơn 3,000 cửa hàng trên toàn quốc.",
+      "requirements": [
+        "Nam, tuổi từ 25-45",
+        "Sức khỏe tốt, không tiền án",
+        "Có chứng chỉ nghiệp vụ bảo vệ là lợi thế"
+      ],
+      "responsibilities": [
+        "Bảo vệ an ninh cửa hàng",
+        "Kiểm tra hàng hóa ra vào",
+        "Hỗ trợ khách hàng khi cần",
+        "Báo cáo sự cố"
+      ],
+      "benefits": [
+        "Lương cao + phụ cấp ca đêm",
+        "Trang bị đồng phục",
+        "Bảo hiểm tai nạn",
+        "Thưởng lễ tết"
+      ],
+      "shifts": [
+        {
+          "time": "Ca ngày",
+          "hours": "6:00 - 18:00",
+          "rate": "32,000 VND/giờ"
+        },
+        {
+          "time": "Ca đêm",
+          "hours": "18:00 - 6:00",
+          "rate": "40,000 VND/giờ"
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "title": "Nhân Viên Vệ Sinh - VinMart",
+      "company": "VINMART",
+      "companyLogo": "VM",
+      "companyTier": "pro",
+      "location": "Hà Nội",
+      "salary": "25,000 - 30,000 VNĐ/giờ",
+      "duration": "3-6 tháng",
+      "badge": null,
+      "urgent": false,
+      "instantPay": false,
+      "postedTime": "Không yêu cầu kinh nghiệm",
+      "postedDate": "2025-12-19",
+      "expiryDate": "2026-06-19",
+      "openings": 20,
+      "applied": 67,
+      "companyRating": 4.5,
+      "companyReviews": 189,
+      "companyDescription": "VinMart là hệ thống siêu thị hàng đầu Việt Nam với hơn 3,000 cửa hàng trên toàn quốc.",
+      "requirements": [
+        "Chăm chỉ, cẩn thận",
+        "Sức khỏe tốt",
+        "Không yêu cầu kinh nghiệm"
+      ],
+      "responsibilities": [
+        "Vệ sinh sàn nhà, kệ hàng",
+        "Dọn dẹp khu vực công cộng",
+        "Thu gom rác thải",
+        "Duy trì không gian sạch sẽ"
+      ],
+      "benefits": [
+        "Công việc ổn định",
+        "Được cung cấp dụng cụ",
+        "Môi trường làm việc thoải mái",
+        "Thưởng chuyên cần"
+      ],
+      "shifts": [
+        {
+          "time": "Ca sáng",
+          "hours": "5:00 - 11:00",
+          "rate": "25,000 VND/giờ"
+        },
+        {
+          "time": "Ca chiều",
+          "hours": "14:00 - 20:00",
+          "rate": "28,000 VND/giờ"
+        },
+        {
+          "time": "Ca đêm",
+          "hours": "20:00 - 2:00",
+          "rate": "30,000 VND/giờ"
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "title": "Nhân Viên Đóng Gói Online - VinMart",
+      "company": "VINMART",
+      "companyLogo": "VM",
+      "companyTier": "pro",
+      "location": "Hà Nội",
+      "salary": "32,000 - 42,000 VNĐ/giờ",
+      "duration": "1-3 tháng",
+      "badge": "HOT",
+      "urgent": true,
+      "instantPay": true,
+      "postedTime": "Cần gấp - Mùa cao điểm",
+      "postedDate": "2025-12-23",
+      "expiryDate": "2026-03-23",
+      "openings": 50,
+      "applied": 234,
+      "companyRating": 4.5,
+      "companyReviews": 189,
+      "companyDescription": "VinMart là hệ thống siêu thị hàng đầu Việt Nam với hơn 3,000 cửa hàng trên toàn quốc.",
+      "requirements": [
+        "Nhanh nhẹn, cẩn thận",
+        "Có thể làm việc theo ca",
+        "Sức khỏe tốt"
+      ],
+      "responsibilities": [
+        "Nhận và xử lý đơn hàng online",
+        "Đóng gói sản phẩm đúng tiêu chuẩn",
+        "Kiểm tra chất lượng trước khi giao",
+        "Phối hợp với bộ phận giao hàng"
+      ],
+      "benefits": [
+        "Thanh toán hàng tuần",
+        "Thưởng năng suất cao",
+        "Làm thêm giờ được trả 150%",
+        "Ăn ca miễn phí"
+      ],
+      "shifts": [
+        {
+          "time": "Ca sáng",
+          "hours": "6:00 - 14:00",
+          "rate": "32,000 VND/giờ"
+        },
+        {
+          "time": "Ca chiều",
+          "hours": "14:00 - 22:00",
+          "rate": "38,000 VND/giờ"
+        },
+        {
+          "time": "Ca đêm",
+          "hours": "22:00 - 6:00",
+          "rate": "42,000 VND/giờ"
+        }
+      ]
     }
   ]
 }

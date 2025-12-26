@@ -63,9 +63,11 @@ interface LandingPageProps {
   onViewJobDetail?: (jobId: number) => void;
   onNavigateToLogin?: (role: 'worker' | 'employer') => void;
   onSetWorkerView?: (view: 'dashboard' | 'training' | 'withdraw' | 'protection' | 'community') => void;
+  isAuthenticated?: boolean;
+  onViewCompany?: (companyName: string) => void;
 }
 
-export function LandingPage({ onViewJobs, onNavigate, onLogout, onViewJobDetail, onNavigateToLogin, onSetWorkerView }: LandingPageProps) {
+export function LandingPage({ onViewJobs, onNavigate, onLogout, onViewJobDetail, onNavigateToLogin, onSetWorkerView, isAuthenticated = false, onViewCompany }: LandingPageProps) {
   const [keyword, setKeyword] = useState('');
   const [location, setLocation] = useState('');
   const [industry, setIndustry] = useState('');
@@ -78,16 +80,19 @@ export function LandingPage({ onViewJobs, onNavigate, onLogout, onViewJobDetail,
   const [skills, setSkills] = useState('');
 
   const locations = [
-    'Hà Nội',
-    'Hải Phòng',
-    'Hải Dương',
-    'Bắc Ninh',
-    'Hưng Yên',
-    'Thái Nguyên',
-    'Vĩnh Phúc',
-    'Phú Thọ',
-    'Quảng Ninh',
-    'Bắc Giang'
+    'Cầu Giấy',
+    'Đống Đa',
+    'Hai Bà Trưng',
+    'Hà Đông',
+    'Thanh Xuân',
+    'Tây Hồ',
+    'Hoàn Kiếm',
+    'Ba Đình',
+    'Long Biên',
+    'Nam Từ Liêm',
+    'Bắc Từ Liêm',
+    'Hoàng Mai',
+    'Tỉnh thành khác'
   ];
 
   const industries = [
@@ -275,44 +280,71 @@ export function LandingPage({ onViewJobs, onNavigate, onLogout, onViewJobDetail,
               </nav>
             </div>
             <div className="flex items-center gap-4">
-              <button className="text-gray-700 hover:text-green-600 transition-colors cursor-pointer">
-                Thông báo
-              </button>
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <button className="flex items-center gap-2 hover:opacity-80 cursor-pointer">
-                    <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-green-700 font-semibold">
-                      NVA
-                    </div>
-                    <ChevronDown className="w-4 h-4 text-gray-600" />
+              {isAuthenticated ? (
+                <>
+                  <button className="text-gray-700 hover:text-green-600 transition-colors cursor-pointer">
+                    Thông báo
                   </button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-56">
-                  <DropdownMenuLabel>
-                    <div className="flex flex-col">
-                      <span className="font-semibold">Nguyễn Văn An</span>
-                      <span className="text-xs text-gray-500 font-normal">nguyenvanan@email.com</span>
-                    </div>
-                  </DropdownMenuLabel>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem onClick={() => {
-                    onSetWorkerView?.('dashboard');
-                    onNavigate?.('dashboard');
-                  }} className="cursor-pointer">
-                    <User className="w-4 h-4 mr-2" />
-                    Hồ sơ của tôi
-                  </DropdownMenuItem>
-                  <DropdownMenuItem className="cursor-pointer">
-                    <Settings className="w-4 h-4 mr-2" />
-                    Cài đặt
-                  </DropdownMenuItem>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem onClick={onLogout} className="text-red-600 cursor-pointer">
-                    <LogOut className="w-4 h-4 mr-2" />
-                    Đăng xuất
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <button className="flex items-center gap-2 hover:opacity-80 cursor-pointer">
+                        <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-green-700 font-semibold">
+                          NVA
+                        </div>
+                        <ChevronDown className="w-4 h-4 text-gray-600" />
+                      </button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end" className="w-56">
+                      <DropdownMenuLabel>
+                        <div className="flex flex-col">
+                          <span className="font-semibold">Nguyễn Văn An</span>
+                          <span className="text-xs text-gray-500 font-normal">nguyenvanan@email.com</span>
+                        </div>
+                      </DropdownMenuLabel>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem onClick={() => {
+                        onSetWorkerView?.('dashboard');
+                        onNavigate?.('dashboard');
+                      }} className="cursor-pointer">
+                        <User className="w-4 h-4 mr-2" />
+                        Hồ sơ của tôi
+                      </DropdownMenuItem>
+                      <DropdownMenuItem className="cursor-pointer">
+                        <Settings className="w-4 h-4 mr-2" />
+                        Cài đặt
+                      </DropdownMenuItem>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem onClick={onLogout} className="text-red-600 cursor-pointer">
+                        <LogOut className="w-4 h-4 mr-2" />
+                        Đăng xuất
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </>
+              ) : (
+                <>
+                  <Button
+                    variant="ghost"
+                    onClick={() => onNavigateToLogin?.('worker')}
+                    className="text-gray-700 hover:text-green-600 cursor-pointer"
+                  >
+                    Đăng nhập
+                  </Button>
+                  <Button
+                    onClick={() => onNavigateToLogin?.('worker')}
+                    className="bg-green-600 hover:bg-green-700 text-white cursor-pointer"
+                  >
+                    Đăng ký
+                  </Button>
+                  <Button
+                    variant="outline"
+                    onClick={() => onNavigateToLogin?.('employer')}
+                    className="border-green-600 text-green-600 hover:bg-green-50 cursor-pointer"
+                  >
+                    Doanh nghiệp
+                  </Button>
+                </>
+              )}
             </div>
           </div>
         </div>
@@ -488,7 +520,7 @@ export function LandingPage({ onViewJobs, onNavigate, onLogout, onViewJobDetail,
             {/* Advanced Search Link */}
             <div className="mt-4 flex items-center gap-2">
               <button className="text-white/90 hover:text-white flex items-center gap-2 transition-colors text-sm cursor-pointer">
-                💡 Gợi ý: Thử tìm "nhân viên kho" hoặc "shipper"
+                💡 Gợi ý: Thử tìm "nhân viên bán hàng" hoặc "pha chế"
               </button>
             </div>
           </div>
@@ -586,7 +618,15 @@ export function LandingPage({ onViewJobs, onNavigate, onLogout, onViewJobDetail,
                       </h4>
                       <div className="flex items-center gap-2 text-gray-600 text-sm">
                         <Building2 className="w-4 h-4" />
-                        <span className="truncate">{job.company}</span>
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            onViewCompany?.(job.company);
+                          }}
+                          className="truncate hover:text-green-600 transition-colors cursor-pointer"
+                        >
+                          {job.company}
+                        </button>
                         {job.companyTier === 'pro' && (
                           <TooltipProvider>
                             <Tooltip>
@@ -687,19 +727,20 @@ export function LandingPage({ onViewJobs, onNavigate, onLogout, onViewJobDetail,
 
           <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
             {[
-              { name: 'VinMart', image: '/src/assets/images/topEmployer/winmart.jpg', badge: true },
-              { name: 'SPX Express', image: '/src/assets/images/topEmployer/spx.jpg', badge: true },
-              { name: 'Grab', image: '/src/assets/images/topEmployer/grab.jpg', badge: true },
-              { name: 'Shopee', image: '/src/assets/images/topEmployer/shopee.jpg', badge: true },
-              { name: 'Lazada', image: '/src/assets/images/topEmployer/lazada.jpg', badge: true },
-              { name: 'Lotte Mart', image: '/src/assets/images/topEmployer/lotte.jpg', badge: false },
-              { name: 'The Coffee House', image: '/src/assets/images/topEmployer/coffee_house.jpg', badge: false },
-              { name: 'Circle K', image: '/src/assets/images/topEmployer/circleK.jpg', badge: false },
-              { name: 'Highlands Coffee', image: '/src/assets/images/topEmployer/highlands.jpg', badge: false },
-              { name: 'GHN Express', image: '/src/assets/images/topEmployer/ghn.jpg', badge: false }
+              { name: 'VINMART', displayName: 'VinMart', image: '/src/assets/images/topEmployer/winmart.jpg', badge: true },
+              { name: 'SPX EXPRESS VIỆT NAM', displayName: 'SPX Express', image: '/src/assets/images/topEmployer/spx.jpg', badge: true },
+              { name: 'GRAB VIỆT NAM', displayName: 'Grab', image: '/src/assets/images/topEmployer/grab.jpg', badge: true },
+              { name: 'SHOPEE EXPRESS', displayName: 'Shopee', image: '/src/assets/images/topEmployer/shopee.jpg', badge: true },
+              { name: 'LAZADA VIỆT NAM', displayName: 'Lazada', image: '/src/assets/images/topEmployer/lazada.jpg', badge: true },
+              { name: 'LOTTE MART', displayName: 'Lotte Mart', image: '/src/assets/images/topEmployer/lotte.jpg', badge: false },
+              { name: 'THE COFFEE HOUSE', displayName: 'The Coffee House', image: '/src/assets/images/topEmployer/coffee_house.jpg', badge: false },
+              { name: 'CIRCLE K', displayName: 'Circle K', image: '/src/assets/images/topEmployer/circleK.jpg', badge: false },
+              { name: 'HIGHLANDS COFFEE', displayName: 'Highlands Coffee', image: '/src/assets/images/topEmployer/highlands.jpg', badge: false },
+              { name: 'GHN EXPRESS', displayName: 'GHN Express', image: '/src/assets/images/topEmployer/ghn.jpg', badge: false }
             ].map((employer, idx) => (
               <div
                 key={idx}
+                onClick={() => onViewCompany?.(employer.name)}
                 className="relative bg-white border-2 border-gray-200 rounded-xl p-6 hover:border-green-600 hover:shadow-lg transition-all cursor-pointer group"
               >
                 {employer.badge && (
@@ -710,9 +751,9 @@ export function LandingPage({ onViewJobs, onNavigate, onLogout, onViewJobDetail,
                   </div>
                 )}
                 <div className="flex flex-col items-center justify-center h-full">
-                  <img src={employer.image} alt={employer.name} className="w-20 h-20 object-contain mb-3" />
+                  <img src={employer.image} alt={employer.displayName} className="w-20 h-20 object-contain mb-3" />
                   <h4 className="text-gray-900 text-center text-sm group-hover:text-green-600 transition-colors">
-                    {employer.name}
+                    {employer.displayName}
                   </h4>
                 </div>
               </div>

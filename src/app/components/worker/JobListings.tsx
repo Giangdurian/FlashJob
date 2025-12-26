@@ -45,9 +45,12 @@ interface JobListingsProps {
   onNavigate: (screen: any) => void;
   onLogout?: () => void;
   onSetWorkerView?: (view: 'dashboard' | 'training' | 'withdraw' | 'protection' | 'community') => void;
+  isAuthenticated?: boolean;
+  onNavigateToLogin?: (role: 'worker' | 'employer') => void;
+  onViewCompany?: (companyName: string) => void;
 }
 
-export function JobListings({ onViewJobDetail, onNavigate, onLogout, onSetWorkerView }: JobListingsProps) {
+export function JobListings({ onViewJobDetail, onNavigate, onLogout, onSetWorkerView, isAuthenticated = false, onNavigateToLogin, onViewCompany }: JobListingsProps) {
   const [showFilters, setShowFilters] = useState(true);
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [activeFilter, setActiveFilter] = useState('luong-cao');
@@ -148,44 +151,71 @@ export function JobListings({ onViewJobDetail, onNavigate, onLogout, onSetWorker
               </nav>
             </div>
             <div className="flex items-center gap-4">
-              <button className="text-gray-700 hover:text-green-600 transition-colors cursor-pointer">
-                Thông báo
-              </button>
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <button className="flex items-center gap-2 hover:opacity-80 cursor-pointer">
-                    <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-green-700 font-semibold">
-                      NVA
-                    </div>
-                    <ChevronDown className="w-4 h-4 text-gray-600" />
+              {isAuthenticated ? (
+                <>
+                  <button className="text-gray-700 hover:text-green-600 transition-colors cursor-pointer">
+                    Thông báo
                   </button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-56">
-                  <DropdownMenuLabel>
-                    <div className="flex flex-col">
-                      <span className="font-semibold">Nguyễn Văn An</span>
-                      <span className="text-xs text-gray-500 font-normal">nguyenvanan@email.com</span>
-                    </div>
-                  </DropdownMenuLabel>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem onClick={() => {
-                    onSetWorkerView?.('dashboard');
-                    onNavigate('dashboard');
-                  }} className="cursor-pointer">
-                    <User className="w-4 h-4 mr-2" />
-                    Hồ sơ của tôi
-                  </DropdownMenuItem>
-                  <DropdownMenuItem className="cursor-pointer">
-                    <Settings className="w-4 h-4 mr-2" />
-                    Cài đặt
-                  </DropdownMenuItem>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem onClick={onLogout} className="text-red-600 cursor-pointer">
-                    <LogOut className="w-4 h-4 mr-2" />
-                    Đăng xuất
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <button className="flex items-center gap-2 hover:opacity-80 cursor-pointer">
+                        <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-green-700 font-semibold">
+                          NVA
+                        </div>
+                        <ChevronDown className="w-4 h-4 text-gray-600" />
+                      </button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end" className="w-56">
+                      <DropdownMenuLabel>
+                        <div className="flex flex-col">
+                          <span className="font-semibold">Nguyễn Văn An</span>
+                          <span className="text-xs text-gray-500 font-normal">nguyenvanan@email.com</span>
+                        </div>
+                      </DropdownMenuLabel>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem onClick={() => {
+                        onSetWorkerView?.('dashboard');
+                        onNavigate('dashboard');
+                      }} className="cursor-pointer">
+                        <User className="w-4 h-4 mr-2" />
+                        Hồ sơ của tôi
+                      </DropdownMenuItem>
+                      <DropdownMenuItem className="cursor-pointer">
+                        <Settings className="w-4 h-4 mr-2" />
+                        Cài đặt
+                      </DropdownMenuItem>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem onClick={onLogout} className="text-red-600 cursor-pointer">
+                        <LogOut className="w-4 h-4 mr-2" />
+                        Đăng xuất
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </>
+              ) : (
+                <>
+                  <Button
+                    variant="ghost"
+                    onClick={() => onNavigateToLogin?.('worker')}
+                    className="text-gray-700 hover:text-green-600 cursor-pointer"
+                  >
+                    Đăng nhập
+                  </Button>
+                  <Button
+                    onClick={() => onNavigateToLogin?.('worker')}
+                    className="bg-green-600 hover:bg-green-700 text-white cursor-pointer"
+                  >
+                    Đăng ký
+                  </Button>
+                  <Button
+                    variant="outline"
+                    onClick={() => onNavigateToLogin?.('employer')}
+                    className="border-green-600 text-green-600 hover:bg-green-50 cursor-pointer"
+                  >
+                    Doanh nghiệp
+                  </Button>
+                </>
+              )}
             </div>
           </div>
         </div>
@@ -387,7 +417,15 @@ export function JobListings({ onViewJobDetail, onNavigate, onLogout, onSetWorker
                               </h3>
                             </div>
                             <div className="flex items-center gap-2">
-                              <p className="text-gray-600">{job.company}</p>
+                              <button
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  onViewCompany?.(job.company);
+                                }}
+                                className="text-gray-600 hover:text-green-600 transition-colors cursor-pointer"
+                              >
+                                {job.company}
+                              </button>
                               {job.companyTier === 'pro' && (
                                 <TooltipProvider>
                                   <Tooltip>

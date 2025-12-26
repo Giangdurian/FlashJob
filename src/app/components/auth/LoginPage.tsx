@@ -2,17 +2,17 @@ import React, { useState } from 'react';
 import { Input } from '../ui/input';
 import { Button } from '../ui/button';
 import { Card, CardContent } from '../ui/card';
-import { CheckCircle2 } from 'lucide-react';
+import { CheckCircle2, Shield } from 'lucide-react';
 
 interface LoginPageProps {
-  onLogin: (role: 'worker' | 'employer') => void;
+  onLogin: (role: 'worker' | 'employer' | 'admin') => void;
   defaultRole?: 'worker' | 'employer';
 }
 
 export function LoginPage({ onLogin, defaultRole = 'worker' }: LoginPageProps) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [selectedRole, setSelectedRole] = useState<'worker' | 'employer'>(defaultRole);
+  const [selectedRole, setSelectedRole] = useState<'worker' | 'employer' | 'admin'>(defaultRole);
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
@@ -56,7 +56,7 @@ export function LoginPage({ onLogin, defaultRole = 'worker' }: LoginPageProps) {
                 <label className="text-sm font-medium text-gray-700 mb-3 block">
                   Bạn là:
                 </label>
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-3 gap-3">
                   <button
                     type="button"
                     onClick={() => setSelectedRole('worker')}
@@ -71,7 +71,7 @@ export function LoginPage({ onLogin, defaultRole = 'worker' }: LoginPageProps) {
                         <CheckCircle2 className="w-5 h-5 text-green-600" />
                       )}
                     </div>
-                    <p className="text-sm font-medium text-gray-900">Người tìm việc</p>
+                    <p className="text-xs font-medium text-gray-900">Người tìm việc</p>
                   </button>
                   <button
                     type="button"
@@ -87,7 +87,23 @@ export function LoginPage({ onLogin, defaultRole = 'worker' }: LoginPageProps) {
                         <CheckCircle2 className="w-5 h-5 text-blue-600" />
                       )}
                     </div>
-                    <p className="text-sm font-medium text-gray-900">Nhà tuyển dụng</p>
+                    <p className="text-xs font-medium text-gray-900">Nhà tuyển dụng</p>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setSelectedRole('admin')}
+                    className={`p-4 border-2 rounded-lg transition-all cursor-pointer ${selectedRole === 'admin'
+                      ? 'border-[#0A2647] bg-[#0A2647]/10'
+                      : 'border-gray-200 hover:border-gray-300'
+                      }`}
+                  >
+                    <div className="flex items-center justify-between mb-2">
+                      <Shield className={`w-6 h-6 ${selectedRole === 'admin' ? 'text-[#0A2647]' : 'text-gray-400'}`} />
+                      {selectedRole === 'admin' && (
+                        <CheckCircle2 className="w-5 h-5 text-[#0A2647]" />
+                      )}
+                    </div>
+                    <p className="text-xs font-medium text-gray-900">Admin</p>
                   </button>
                 </div>
               </div>
@@ -126,8 +142,10 @@ export function LoginPage({ onLogin, defaultRole = 'worker' }: LoginPageProps) {
               <Button
                 type="submit"
                 className={`w-full h-12 text-white text-base font-semibold cursor-pointer ${selectedRole === 'worker'
-                  ? 'bg-green-600 hover:bg-green-700'
-                  : 'bg-blue-600 hover:bg-blue-700'
+                    ? 'bg-green-600 hover:bg-green-700'
+                    : selectedRole === 'employer'
+                      ? 'bg-blue-600 hover:bg-blue-700'
+                      : 'bg-[#0A2647] hover:bg-[#0A2647]/90'
                   }`}
               >
                 ĐĂNG NHẬP
